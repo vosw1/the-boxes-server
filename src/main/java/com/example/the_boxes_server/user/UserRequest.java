@@ -47,7 +47,7 @@ public class UserRequest {
 
         @NotNull
         @Past(message = "날짜는 과거여야 합니다.")
-        private Date birth;
+        private String birth;
 
         @NotEmpty(message = "전화번호가 공백일 수 없습니다")
         @Pattern(regexp = "^\\d{3}-\\d{3,4}-\\d{4}$", message = "전화번호 형식이 올바르지 않습니다")
@@ -69,5 +69,15 @@ public class UserRequest {
 
         @NotNull
         private Integer equipment;
+
+        public User toEntity() {
+            return User.builder()
+                    .email(this.email)
+                    .password(this.password)
+                    .name(this.name)
+                    .phone(this.phone)
+                    .build();
+        }
+
     }
 }
