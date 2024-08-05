@@ -5,21 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-
-import java.sql.Date;
 import java.sql.Timestamp;
 
 @NoArgsConstructor
 @Entity
 @Data
-@Table(name = "Users")
+@Table(name = "app_user") // 테이블 이름 변경
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId; // 사용자 ID (기본 키)
-
-    private String profilePicture; // 프로필 사진 경로
 
     @Column(unique = true, length = 50, nullable = false)
     private String username; // 사용자 아이디
@@ -30,7 +26,7 @@ public class User {
     @Column(length = 20, nullable = false)
     private String name; // 이름
 
-    private Date birthdate; // 생년월일
+    private String birthdate; // 생년월일
     private String phone; // 전화번호
     private String address; // 주소
 
@@ -52,7 +48,7 @@ public class User {
             String username,
             String password,
             String name,
-            Date birthdate,
+            String birthdate,
             String phone,
             String address,
             String email,

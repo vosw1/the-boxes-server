@@ -1,0 +1,17 @@
+-- INSERT INTO app_user (
+--     username, password, name, address, email, birthdate, phone,
+--     companyAddress, industry, logisticsCenterLocation, position, equipment
+-- ) VALUES (
+--              'asdf',
+--              'as1234',
+--              '홍길동',
+--              '부산광역시 부산진구 가야동',
+--              'as1234@nate.com',
+--              '1990-05-15',
+--              '010-1234-7890',
+--              'Tech Solutions',
+--              '물류',
+--              '부산광역시 강서구',
+--              '사원',
+--              '바코드'
+--          );

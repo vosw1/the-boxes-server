@@ -1,17 +1,14 @@
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.2'
-    id 'io.spring.dependency-management' version '1.1.6'
-    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.example'
-version = '0.0.1-SNAPSHOT'
+version = ''
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
+    sourceCompatibility = '21'
 }
 
 configurations {
@@ -24,46 +21,28 @@ repositories {
     mavenCentral()
 }
 
-ext {
-    set('snippetsDir', file("build/generated-snippets"))
-}
-
 dependencies {
-    dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-mustache' // Spring Boot Mustache 템플릿 엔진
-        implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // Spring Boot OAuth2 클라이언트
-        implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server' // Spring Boot OAuth2 리소스 서버
-        implementation 'org.springframework.boot:spring-boot-starter-security' // Spring Boot Security (보안 관련)
-        implementation 'org.springframework.session:spring-session-core' // Spring Session Core (세션 관리)
-        implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0' // Apache Commons Lang 라이브러리 (유틸리티 클래스 포함)
-        implementation group: 'com.auth0', name: 'java-jwt', version: '4.3.0' // Java JWT (JSON Web Token) 라이브러리
-        implementation 'org.springframework.boot:spring-boot-starter-validation' // Spring Boot Validation (Bean 검증)
-        implementation 'org.springframework.boot:spring-boot-starter-aop' // Spring Boot AOP (Aspect-Oriented Programming)
-        implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.4' // jBCrypt (비밀번호 해싱 라이브러리)
-        implementation 'com.google.code.gson:gson:2.10.1' // Gson (JSON 처리 라이브러리)
-        implementation group: 'org.qlrm', name: 'qlrm', version: '4.0.1' // QLRM (JPA Result Mapping 라이브러리)
-        implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // Spring Data JPA (Java Persistence API)
-        implementation 'org.springframework.boot:spring-boot-starter-web' // Spring Web (웹 애플리케이션 개발)
-        compileOnly 'org.projectlombok:lombok'  // Lombok (코드 생성 라이브러리, 컴파일 시에만 사용)
-        annotationProcessor 'org.projectlombok:lombok'
-        developmentOnly 'org.springframework.boot:spring-boot-devtools' // Spring Boot 개발 도구 (Hot reload 등)
-        runtimeOnly 'com.h2database:h2' // H2 데이터베이스 (인메모리 데이터베이스, 런타임 시에만 사용)
-        runtimeOnly 'com.mysql:mysql-connector-j' // MySQL 커넥터 (MySQL 데이터베이스 연결, 런타임 시에만 사용)
-        runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'  // Microsoft SQL Server 커넥터 (MSSQL 데이터베이스 연결, 런타임 시에만 사용)
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'  // Spring Boot 테스트 (테스트 관련 라이브러리)
-        testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc' // Spring REST Docs MockMVC
-        testImplementation 'org.springframework.security:spring-security-test' // Spring Security 테스트 (보안 관련 테스트)
-        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'  // JUnit 플랫폼 런처 (테스트 실행)
-    }
-
+    implementation 'org.springframework.boot:spring-boot-starter-mustache'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    implementation group: 'com.auth0', name: 'java-jwt', version: '4.3.0'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.4'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation group: 'org.qlrm', name: 'qlrm', version: '4.0.1'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.h2database:h2'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
-    outputs.dir snippetsDir
     useJUnitPlatform()
 }
 
-tasks.named('asciidoctor') {
-    inputs.dir snippetsDir
-    dependsOn test
+jar{
+    enabled  = false
 }
