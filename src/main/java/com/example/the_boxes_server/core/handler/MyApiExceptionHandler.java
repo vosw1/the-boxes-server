@@ -1,6 +1,7 @@
-package com.example.the_boxes_server.core;
+package com.example.the_boxes_server.core.handler;
 
 import com.example.the_boxes_server.core.exceotions.*;
+import com.example.the_boxes_server.core.util.ApiUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

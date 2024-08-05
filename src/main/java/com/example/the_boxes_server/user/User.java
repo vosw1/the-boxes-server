@@ -49,7 +49,6 @@ public class User {
     @Builder
     public User(
             Integer userId,
-            String profilePicture,
             String username,
             String password,
             String name,
@@ -64,7 +63,6 @@ public class User {
             String equipment
     ) {
         this.userId = userId;
-        this.profilePicture = profilePicture;
         this.username = username;
         this.password = password;
         this.name = name;

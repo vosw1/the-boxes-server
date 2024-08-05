@@ -1,6 +1,6 @@
 package com.example.the_boxes_server.user;
 
-import com.example.the_boxes_server.core.JwtUtil;
+import com.example.the_boxes_server.core.util.JwtUtil;
 import com.example.the_boxes_server.core.exceotions.Exception401;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

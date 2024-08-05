@@ -1,4 +1,4 @@
-package com.example.the_boxes_server.core;
+package com.example.the_boxes_server.core.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

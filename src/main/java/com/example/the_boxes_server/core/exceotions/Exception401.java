@@ -1,7 +1,7 @@
 package com.example.the_boxes_server.core.exceotions;
 
 
-import com.example.the_boxes_server.core.ApiUtil;
+import com.example.the_boxes_server.core.util.ApiUtil;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 

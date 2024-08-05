@@ -1,4 +1,4 @@
-package com.example.the_boxes_server.core;
+package com.example.the_boxes_server.core.util;
 
 import lombok.*;
 import org.springframework.http.HttpStatus;

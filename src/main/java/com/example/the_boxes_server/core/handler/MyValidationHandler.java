@@ -1,4 +1,4 @@
-package com.example.the_boxes_server.core;
+package com.example.the_boxes_server.core.handler;
 
 import com.example.the_boxes_server.core.exceotions.Exception400;
 import org.aspectj.lang.JoinPoint;
