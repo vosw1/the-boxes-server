@@ -5,12 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Entity
 @Data
-@Table(name = "users") // 테이블 이름 변경
+@Table(name = "users")
 public class User {
 
     @Id
@@ -40,7 +40,7 @@ public class User {
     private String equipment; // 보유 장비
 
     @CreationTimestamp
-    private Timestamp createdAt; // 생성 시간
+    private LocalDateTime createdAt; // 생성 시간
 
     @Builder
     public User(

@@ -1,37 +1,48 @@
 package com.example.the_boxes_server.user;
 
+import com.example.the_boxes_server.core.util.ApiUtil;
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 public class UserController {
 
-    @GetMapping("/") // 홈
-    public String home() {
-        return "";
+    private final UserService userService;
+    private final HttpSession session;
+
+    // 회원 로그인
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody UserRequest.LoginDTO reqDTO, Errors errors) {
+        String jwt = userService.login(reqDTO);
+        UserResponse.LoginDTO respDTO = userService.loginByDTO(reqDTO);
+        return ResponseEntity.ok().header("Authorization", "Bearer " + jwt).body(new ApiUtil<>(respDTO));
     }
 
-    @PostMapping("/join") // 회원가입
-    public String join() {
-        return "/";
+    // 회원 가입
+    @PostMapping("/join")
+    public ResponseEntity<?> join(@Valid @RequestBody UserRequest.JoinDTO reqDTO, Errors errors) {
+
+        String jwt = userService.joinAndLogin(reqDTO);
+        UserResponse.JoinDTO respDTO = userService.joinByDTO(reqDTO);
+        return ResponseEntity.ok().header("Authorization", "Bearer " + jwt).body(new ApiUtil<>(respDTO));
     }
 
-    @GetMapping("/api/username-same-check") // 회원가입시 이름 중복체크
-    public String usernameSameCheck(String username) {
-        return "";
-    }
 
-    @PostMapping("/login") // 로그인
-    public String login() {
-        return "/";
-    }
-
-    @GetMapping("/logout") // 로그아웃
-    public String logout() {
-        //session.invalidate();
-        return "redirect:/";
+    //회원가입 시 이메일중복 체크확인
+    @GetMapping("/username-same-check")
+    public @ResponseBody ApiUtil<?> usernameSameCheck(String username){
+        Optional userOp = userService.findByUsername(username);
+        if (userOp == null) {
+            return new ApiUtil<>(true);
+        } else {
+            return new ApiUtil<>(false);
+        }
     }
 }
