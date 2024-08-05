@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Entity
 @Data
-@Table(name = "app_user") // 테이블 이름 변경
+@Table(name = "users") // 테이블 이름 변경
 public class User {
 
     @Id
