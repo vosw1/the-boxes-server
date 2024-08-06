@@ -35,7 +35,7 @@ public class UserController {
     }
 
 
-    //회원가입 시 이메일중복 체크확인
+    //회원가입 시 아이디 체크확인
     @GetMapping("/username-same-check")
     public @ResponseBody ApiUtil<?> usernameSameCheck(String username){
         Optional userOp = userService.findByUsername(username);
