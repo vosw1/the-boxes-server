@@ -17,6 +17,13 @@ public class UserController {
     private final UserService userService;
     private final HttpSession session;
 
+    // 로그아웃
+    @GetMapping("/logout")
+    public String logout() {
+        session.invalidate();
+        return "/home";
+    }
+
     // 회원 로그인
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody UserRequest.LoginDTO reqDTO, Errors errors) {
