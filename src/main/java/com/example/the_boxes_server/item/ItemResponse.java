@@ -47,6 +47,15 @@ public class ItemResponse {
         private String itemName;
         private int amount;
         private Boolean isActive;
+        private Date updatedAt;
+
+        public RemoveDTO(Item item) {
+            this.itemId = item.getItemId();
+            this.itemName = item.getItemName();
+            this.amount = item.getAmount();
+            this.isActive = item.getIsActive();
+            this.updatedAt = item.getUpdatedAt();
+        }
     }
 
     @Data

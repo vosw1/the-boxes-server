@@ -31,10 +31,15 @@ public class ItemController {
     }
 
     @PutMapping("/api/item/{itemId}")
-    public ResponseEntity<ItemResponse.UpdateDTO> update(@PathVariable int itemId, @RequestBody ItemRequest.UpdateDTO reqDTO) {
-        ItemResponse.UpdateDTO updatedItem = itemService.update(itemId, reqDTO);
-        return ResponseEntity.ok(updatedItem);
+    public ResponseEntity<?> update(@PathVariable int itemId, @RequestBody ItemRequest.UpdateDTO reqDTO) {
+        ItemResponse.UpdateDTO resDTO = itemService.update(itemId, reqDTO);
+        return ResponseEntity.ok(new ApiUtil<>(resDTO));
     }
 
-
+    @DeleteMapping("/api/item/{itemId}")
+    public ResponseEntity<?> delete(@PathVariable Integer itemId) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        ItemResponse.RemoveDTO resDTO = itemService.remove(itemId, sessionUser.getUserId());
+        return ResponseEntity.ok(new ApiUtil<>(null));
+    }
 }
