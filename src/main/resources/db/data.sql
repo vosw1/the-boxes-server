@@ -18,7 +18,7 @@ VALUES (
 
 
 INSERT INTO Item (item_id, item_name, amount, is_active, created_at, updated_at)
-VALUES ('ITEM001', 'Sample Item', 100, TRUE, now(), now());
+VALUES (1, 'Sample Item', 100, TRUE, now(), now());
 
 
 

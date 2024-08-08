@@ -7,7 +7,7 @@ public class ItemResponse {
 
     @Data
     public static class ListDTO {
-        private String itemId;
+        private int itemId;
         private String itemName;
         private int amount;
         private Boolean isActive;
@@ -16,7 +16,7 @@ public class ItemResponse {
 
     @Data
     public static class SaveDTO {
-        private String itemId;
+        private int itemId;
         private String itemName;
         private int amount;
         private Boolean isActive;
@@ -36,7 +36,7 @@ public class ItemResponse {
 
     @Data
     public static class RemoveDTO {
-        private String itemId;
+        private int itemId;
         private String itemName;
         private int amount;
         private Boolean isActive;

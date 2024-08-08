@@ -16,9 +16,9 @@ import lombok.*;
 public class Item {
 
     @Id
-    @Size(max = 50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotBlank
-    private String itemId;
+    private int itemId;
 
     @Size(max = 100)
     @NotBlank
