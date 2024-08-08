@@ -9,13 +9,16 @@ public class ItemResponse {
     public static class ListDTO {
         private int itemId;
         private String itemName;
+        private String classification;
         private int amount;
+        private String itemLocation;
         private Boolean isActive;
 
         public ListDTO(Item item) {
             this.itemId = item.getItemId();
             this.itemName = item.getItemName();
             this.amount = item.getAmount();
+            this.itemLocation = item.getItemLocation();
             this.isActive = item.getIsActive();
         }
     }
@@ -26,6 +29,8 @@ public class ItemResponse {
         private int itemId;
         private String itemName;
         private int amount;
+        private String classification;
+        private String itemLocation;
         private Boolean isActive;
         private Date createdAt;
         private Date updatedAt;
@@ -34,6 +39,8 @@ public class ItemResponse {
             this.itemId = item.getItemId();
             this.itemName = item.getItemName();
             this.amount = item.getAmount();
+            this.classification = item.getClassification();
+            this.itemLocation = item.getItemLocation();
             this.isActive = item.getIsActive();
             this.createdAt = item.getCreatedAt();
             this.updatedAt = item.getUpdatedAt();
@@ -45,7 +52,9 @@ public class ItemResponse {
     public static class RemoveDTO {
         private int itemId;
         private String itemName;
+        private String classification;
         private int amount;
+        private String itemLocation;
         private Boolean isActive;
         private Date updatedAt;
 
@@ -53,6 +62,8 @@ public class ItemResponse {
             this.itemId = item.getItemId();
             this.itemName = item.getItemName();
             this.amount = item.getAmount();
+            this.classification = item.getClassification();
+            this.itemLocation = item.getItemLocation();
             this.isActive = item.getIsActive();
             this.updatedAt = item.getUpdatedAt();
         }
@@ -63,6 +74,8 @@ public class ItemResponse {
         private int itemId;
         private String itemName;
         private int amount;
+        private String classification;
+        private String itemLocation;
         private Boolean isActive;
         private Date createdAt;
         private Date updatedAt;
@@ -71,6 +84,8 @@ public class ItemResponse {
             this.itemId = item.getItemId();
             this.itemName = item.getItemName();
             this.amount = item.getAmount();
+            this.classification = item.getClassification();
+            this.itemLocation = item.getItemLocation();
             this.isActive = item.getIsActive();
             this.createdAt = item.getCreatedAt();
             this.updatedAt = item.getUpdatedAt();

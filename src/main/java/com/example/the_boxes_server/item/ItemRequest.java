@@ -12,6 +12,8 @@ public class ItemRequest {
         private int itemId;
         private String itemName;
         private int amount;
+        private String classification;
+        private String itemLocation;
         private Boolean isActive;
     }
 
@@ -20,6 +22,8 @@ public class ItemRequest {
         private int itemId;
         private String itemName;
         private int amount;
+        private String classification;
+        private String itemLocation;
         private Boolean isActive;
         private Date updatedAt;
 
@@ -27,6 +31,8 @@ public class ItemRequest {
             return Item.builder().
                     itemId(itemId).
                     itemName(itemName).
+                    itemLocation(itemLocation).
+                    classification(classification).
                     amount(amount).
                     isActive(isActive)
                     .build();
@@ -38,6 +44,8 @@ public class ItemRequest {
         private int itemId;
         private String itemName;
         private int amount;
+        private String itemLocation;
+        private String classification;
         private Boolean isActive;
         private Date updatedAt;
 
@@ -46,6 +54,8 @@ public class ItemRequest {
                     itemId(itemId).
                     itemName(itemName).
                     amount(amount).
+                    classification(classification).
+                    itemLocation(itemLocation).
                     isActive(isActive)
                     .build();
         }
@@ -56,6 +66,8 @@ public class ItemRequest {
         private int itemId;
         private String itemName;
         private int amount;
+        private String classification;
+        private String itemLocation;
         private Boolean isActive;
     }
 }

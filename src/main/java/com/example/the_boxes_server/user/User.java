@@ -36,8 +36,6 @@ public class User {
     private String companyAddress; // 회사 주소
     private String industry; // 업종
     private String position; // 직책
-    private String logisticsCenterLocation; // 물류 센터 위치
-    private String equipment; // 보유 장비
 
     @CreationTimestamp
     private LocalDateTime createdAt; // 생성 시간
@@ -69,7 +67,5 @@ public class User {
         this.companyAddress = companyAddress;
         this.industry = industry;
         this.position = position;
-        this.logisticsCenterLocation = logisticsCenterLocation;
-        this.equipment = equipment;
     }
 }

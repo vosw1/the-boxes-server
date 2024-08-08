@@ -24,6 +24,12 @@ public class Item {
     @NotBlank
     private String itemName; // 아이템 이름, 빈 문자열 불가
 
+    @Size(max = 100)
+    @NotBlank
+    private String itemLocation; // 아이템 위치
+
+    private String classification; // 아이템 분류
+
     private int amount; // 수량
 
     private Boolean isActive; // 활성 상태
