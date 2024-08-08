@@ -1,7 +1,6 @@
 package com.example.the_boxes_server.item;
 
 import java.util.Date;
-import java.util.UUID;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -17,31 +16,30 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotBlank
-    private int itemId;
+    private int itemId; // ID 필드, 자동 생성
 
     @Size(max = 100)
     @NotBlank
-    private String itemName;
+    private String itemName; // 아이템 이름, 빈 문자열 불가
 
-    private int amount;
+    private int amount; // 수량
 
-    private Boolean isActive;
+    private Boolean isActive; // 활성 상태
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+    private Date createdAt; // 생성 일시
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedAt;
+    private Date updatedAt; // 업데이트 일시
 
     @PrePersist
     protected void onCreate() {
-        createdAt = new Date();
+        createdAt = new Date(); // 생성 시 일시 설정
     }
 
     @PreUpdate
     protected void onUpdate() {
-        updatedAt = new Date();
+        updatedAt = new Date(); // 업데이트 시 일시 설정
     }
 }

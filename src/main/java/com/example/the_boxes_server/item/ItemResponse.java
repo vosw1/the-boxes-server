@@ -48,4 +48,23 @@ public class ItemResponse {
         private int amount;
         private Boolean isActive;
     }
+
+    @Data
+    public static class UpdateDTO {
+        private int itemId;
+        private String itemName;
+        private int amount;
+        private Boolean isActive;
+        private Date createdAt;
+        private Date updatedAt;
+
+        public UpdateDTO(Item item) {
+            this.itemId = item.getItemId();
+            this.itemName = item.getItemName();
+            this.amount = item.getAmount();
+            this.isActive = item.getIsActive();
+            this.createdAt = item.getCreatedAt();
+            this.updatedAt = item.getUpdatedAt();
+        }
+    }
 }

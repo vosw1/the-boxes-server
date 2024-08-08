@@ -34,6 +34,24 @@ public class ItemRequest {
     }
 
     @Data
+    public static class UpdateDTO {
+        private int itemId;
+        private String itemName;
+        private int amount;
+        private Boolean isActive;
+        private Date updatedAt;
+
+        public Item toEntity(User user) {
+            return Item.builder().
+                    itemId(itemId).
+                    itemName(itemName).
+                    amount(amount).
+                    isActive(isActive)
+                    .build();
+        }
+    }
+
+    @Data
     public static class RemoveDTO {
         private int itemId;
         private String itemName;

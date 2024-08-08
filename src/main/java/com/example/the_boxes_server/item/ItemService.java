@@ -1,13 +1,12 @@
 package com.example.the_boxes_server.item;
 
+import com.example.the_boxes_server.core.exceotions.Exception404;
 import com.example.the_boxes_server.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -27,5 +26,18 @@ public class ItemService {
         Item item = reqDTO.toEntity(sessionUser);
         item = itemRepository.save(item);
         return new ItemResponse.SaveDTO(item);
+    }
+
+    @Transactional
+    public ItemResponse.UpdateDTO update(int itemId, ItemRequest.UpdateDTO reqDTO) {
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new Exception404("해당 품목을 찾을 수 없습니다"));
+        item.setItemName(reqDTO.getItemName());
+        item.setAmount(reqDTO.getAmount());
+        item.setIsActive(reqDTO.getIsActive());
+
+        itemRepository.save(item);
+
+        return new ItemResponse.UpdateDTO(item);
     }
 }
