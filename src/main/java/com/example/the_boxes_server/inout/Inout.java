@@ -16,6 +16,7 @@ import java.util.Date;
 @Table(name = "inout")
 public class Inout {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Size(max = 14)
     private String receivingCode;
 

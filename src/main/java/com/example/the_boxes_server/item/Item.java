@@ -1,6 +1,7 @@
 package com.example.the_boxes_server.item;
 
 import java.util.Date;
+import java.util.UUID;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -17,13 +18,13 @@ public class Item {
     @Id
     @Size(max = 50)
     @NotBlank
-    private String itemCode;
+    private String itemId;
 
     @Size(max = 100)
     @NotBlank
     private String itemName;
 
-    private String description;
+    private int amount;
 
     private Boolean isActive;
 
@@ -37,7 +38,6 @@ public class Item {
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
-        updatedAt = new Date();
     }
 
     @PreUpdate
