@@ -11,6 +11,13 @@ public class ItemResponse {
         private String itemName;
         private int amount;
         private Boolean isActive;
+
+        public ListDTO(Item item) {
+            this.itemId = item.getItemId();
+            this.itemName = item.getItemName();
+            this.amount = item.getAmount();
+            this.isActive = item.getIsActive();
+        }
     }
 
 
