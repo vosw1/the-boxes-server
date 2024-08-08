@@ -1,5 +1,6 @@
 package com.example.the_boxes_server.item;
 
+import com.example.the_boxes_server.core.exceotions.Exception403;
 import com.example.the_boxes_server.core.exceotions.Exception404;
 import com.example.the_boxes_server.user.User;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +40,16 @@ public class ItemService {
         itemRepository.save(item);
 
         return new ItemResponse.UpdateDTO(item);
+    }
+
+    @Transactional
+    public ItemResponse.RemoveDTO remove(int itemId, Integer sessionUserId) {
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new Exception404("해당 품목을 찾을 수 없습니다"));
+        if (sessionUserId != item.getUser().getUserId()) {
+            throw new Exception403("해당 품목을 삭제할 권한이 없습니다");
+        }
+        itemRepository.deleteById(itemId);
+        return new ItemResponse.RemoveDTO(item);
     }
 }

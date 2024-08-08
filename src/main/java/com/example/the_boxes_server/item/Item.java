@@ -1,6 +1,8 @@
 package com.example.the_boxes_server.item;
 
 import java.util.Date;
+
+import com.example.the_boxes_server.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -25,6 +27,9 @@ public class Item {
     private int amount; // 수량
 
     private Boolean isActive; // 활성 상태
+    @ManyToOne
+    @JoinColumn(name = "user_user_id")
+    private User user; // 활성 상태
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)

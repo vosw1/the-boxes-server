@@ -20,8 +20,8 @@ public class UserService {
         User user = userRepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
                 .orElseThrow(() -> new Exception401("인증되지 않았습니다"));
 
-        String jwt = JwtUtil.userCreate(user);
-        JwtUtil.userVerify(jwt);
+        String jwt = JwtUtil.create(user);
+        JwtUtil.verify(jwt);
 
         return jwt;
     }
@@ -47,8 +47,8 @@ public class UserService {
         User joinUser = userRepository.save(reqDTO.toEntity());
 
         // 로그인
-        String jwt = JwtUtil.userCreate(joinUser);
-        JwtUtil.userVerify(jwt);
+        String jwt = JwtUtil.create(joinUser);
+        JwtUtil.verify(jwt);
 
         return jwt;
     }
