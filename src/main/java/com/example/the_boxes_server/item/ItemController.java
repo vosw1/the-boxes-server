@@ -1,6 +1,5 @@
 package com.example.the_boxes_server.item;
 
-import com.example.the_boxes_server.user.SessionUser;
 import com.example.the_boxes_server.user.User;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

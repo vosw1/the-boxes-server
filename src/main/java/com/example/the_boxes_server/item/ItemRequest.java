@@ -15,6 +15,10 @@ public class ItemRequest {
         private String classification;
         private String itemLocation;
         private Boolean isActive;
+
+        private int oldQuantity;
+        private int inQuantity;
+        private int outQuantity;
     }
 
     @Data

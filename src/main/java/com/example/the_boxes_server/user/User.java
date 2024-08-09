@@ -32,9 +32,6 @@ public class User {
 
     @Column(length = 100, nullable = false)
     private String email; // 이메일
-
-    private String companyAddress; // 회사 주소
-    private String industry; // 업종
     private String position; // 직책
 
     @CreationTimestamp
@@ -50,11 +47,7 @@ public class User {
             String phone,
             String address,
             String email,
-            String companyAddress,
-            String industry,
-            String position,
-            String logisticsCenterLocation,
-            String equipment
+            String position
     ) {
         this.userId = userId;
         this.username = username;
@@ -64,8 +57,7 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.email = email;
-        this.companyAddress = companyAddress;
-        this.industry = industry;
         this.position = position;
+
     }
 }

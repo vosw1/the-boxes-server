@@ -53,22 +53,9 @@ public class UserRequest {
         @Pattern(regexp = "^\\d{3}-\\d{3,4}-\\d{4}$", message = "전화번호 형식이 올바르지 않습니다")
         private String phone;
 
-        @NotEmpty(message = "회사명이 공백일 수 없습니다")
-        @Size(min = 1, max = 20, message = "회사명은 1자 이상 20자 이하여야 합니다")
-        private String compname;
-
-        @NotEmpty(message = "업종이 공백일 수 없습니다")
-        @Size(min = 1, max = 20, message = "업종은 1자 이상 20자 이하여야 합니다")
-        private String industry;
-
-        @NotEmpty(message = "물류센터 주소가 공백일 수 없습니다")
-        private String cenaddress;
-
         @NotNull
         private Integer position;
 
-        @NotNull
-        private Integer equipment;
 
         public User toEntity() {
             return User.builder()

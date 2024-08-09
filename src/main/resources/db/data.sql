@@ -1,5 +1,4 @@
-INSERT INTO users (username, password, name, address, email, birthdate, phone,
-                   company_address, industry, position, created_at)
+INSERT INTO users (username, password, name, address, email, birthdate, phone, position, created_at)
 VALUES (
         'asdf',
         'as1234',
@@ -8,35 +7,36 @@ VALUES (
         'as1234@nate.com',
         '1990-05-15',
         '010-1234-7890',
-        'Tech Solutions',
-        '물류',
         '사원',
-        '2024-07-01'
+        now()
        );
 
 
-INSERT INTO Item (item_name, amount, classification, item_location, is_active, created_at, updated_at)
-VALUES ('Sample Item', 10, '과자','A-1', TRUE, now(), NULL),
-       ('Sample Item', 20, '과자','A-1', TRUE, now(), NULL),
-       ('Sample Item', 30, '과자','A-2', TRUE, now(), NULL),
-       ('Sample Item', 40, '과자','A-2', TRUE, now(), NULL),
-       ('Sample Item', 10, '과자','A-3', TRUE, now(), NULL),
-       ('Sample Item', 20, '과자','A-3', TRUE, now(), NULL),
-       ('Sample Item', 30, '과자','A-4', TRUE, now(), NULL),
-       ('Sample Item', 40, '과자','A-4', TRUE, now(), NULL),
-       ('Sample Item', 50, '과자','A-5', TRUE, now(), NULL),
-       ('Sample Item', 10, '과자','B-1', TRUE, now(), NULL),
-       ('Sample Item', 20, '음료수','B-2', TRUE, now(), NULL),
-       ('Sample Item', 30, '음료수','B-3', TRUE, now(), NULL),
-       ('Sample Item', 40, '음료수','B-4', TRUE, now(), NULL),
-       ('Sample Item', 50, '음료수','B-5', TRUE, now(), NULL),
-       ('Sample Item', 60, '음료수','C-1', TRUE, now(), NULL),
-       ('Sample Item', 10, '음료수','C-2', TRUE, now(), NULL),
-       ('Sample Item', 20, '음료수','C-3', TRUE, now(), NULL),
-       ('Sample Item', 30, '음료수','C-4', TRUE, now(), NULL),
-       ('Sample Item', 40, '음료수','C-5', TRUE, now(), NULL),
-       ('Sample Item', 50, '음료수','D-1', TRUE, now(), NULL),
-       ('Sample Item', 60, '음료수','D-2', TRUE, now(), NULL);
+INSERT INTO item (item_name, old_quantity, in_quantity, out_quantity, amount, classification, item_location, is_active, created_at)
+VALUES
+    ('Sample Item', 60, 10, 60, 10, '과자','A-1', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 0, 40, 20, '과자','A-1', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 10, 40, 30, '과자','A-2', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 10, 30, 40, '과자','A-2', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 0, 50, 10, '과자','A-3', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 10, 50, 20, '과자','A-3', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 10, 40, 30, '과자','A-4', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 20, 40, 40, '과자','A-4', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 20, 30, 50, '과자','A-5', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 0, 50, 10, '과자','B-1', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 10, 50, 20, '음료수','B-2', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 20, 50, 30, '음료수','B-3', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 30, 50, 40, '음료수','B-4', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 30, 40, 50, '음료수','B-5', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 10, 10, 60, '음료수','C-1', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 0, 50, 10, '음료수','C-2', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 10, 50, 20, '음료수','C-3', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 10, 40, 30, '음료수','C-4', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 20, 40, 40, '음료수','C-5', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 20, 30, 50, '음료수','D-1', TRUE, CURRENT_TIMESTAMP),
+    ('Sample Item', 60, 10, 10, 60, '음료수','D-2', TRUE, CURRENT_TIMESTAMP);
+
+
 
 
 
