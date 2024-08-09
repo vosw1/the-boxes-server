@@ -29,7 +29,7 @@ public class ItemRequest {
         private String classification;
         private String itemLocation;
         private Boolean isActive;
-        private Date updatedAt;
+        private Date createdAt;
 
         public Item toEntity(User user) {
             return Item.builder().
@@ -51,7 +51,7 @@ public class ItemRequest {
         private String itemLocation;
         private String classification;
         private Boolean isActive;
-        private Date updatedAt;
+        private Date createdAt;
 
         public Item toEntity(User user) {
             return Item.builder().

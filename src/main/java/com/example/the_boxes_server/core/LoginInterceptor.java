@@ -32,7 +32,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         System.out.println("==========JWT");
         // 검증
         try {
-            DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512("yeoeotteohno")).build().verify(jwt);
+            DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512("theboxes")).build().verify(jwt);
             String role = decodedJWT.getClaim("role").asString();
 
             return true;

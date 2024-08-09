@@ -17,6 +17,8 @@ public class ItemResponse {
         private int oldQuantity;
         private int inQuantity;
         private int outQuantity;
+        private int createdAt;
+
 
         public ListDTO(Item item) {
             this.itemId = item.getItemId();
@@ -40,7 +42,6 @@ public class ItemResponse {
         private String itemLocation;
         private Boolean isActive;
         private Date createdAt;
-        private Date updatedAt;
 
         public SaveDTO(Item item) {
             this.itemId = item.getItemId();
@@ -62,7 +63,7 @@ public class ItemResponse {
         private int amount;
         private String itemLocation;
         private Boolean isActive;
-        private Date updatedAt;
+        private Date createdAt;
 
         public RemoveDTO(Item item) {
             this.itemId = item.getItemId();

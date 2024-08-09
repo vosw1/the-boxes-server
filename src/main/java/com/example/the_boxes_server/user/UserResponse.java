@@ -1,7 +1,6 @@
 package com.example.the_boxes_server.user;
 
 import lombok.Data;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class UserResponse {
