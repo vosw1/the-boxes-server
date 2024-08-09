@@ -46,15 +46,16 @@ public class ItemService {
         // 업데이트 전 로그
         System.out.println("Before update: " + item);
 
+        // DTO의 값을 엔티티에 설정
         if (reqDTO.getItemName() != null) item.setItemName(reqDTO.getItemName());
-        if (reqDTO.getAmount() != null) item.setAmount(reqDTO.getAmount());
         if (reqDTO.getClassification() != null) item.setClassification(reqDTO.getClassification());
         if (reqDTO.getItemLocation() != null) item.setItemLocation(reqDTO.getItemLocation());
         if (reqDTO.getIsActive() != null) item.setIsActive(reqDTO.getIsActive());
-        if (reqDTO.getOldQuantity() != null) item.setOldQuantity(reqDTO.getOldQuantity());
-        if (reqDTO.getInQuantity() != null) item.setInQuantity(reqDTO.getInQuantity());
-        if (reqDTO.getOutQuantity() != null) item.setOutQuantity(reqDTO.getOutQuantity());
 
+        // 재고 업데이트 (입고와 출고)
+        item.updateStock(reqDTO.getInQuantity(), reqDTO.getOutQuantity());
+
+        // 엔티티 저장
         item = itemRepository.save(item);
 
         // 업데이트 후 로그
@@ -62,7 +63,6 @@ public class ItemService {
 
         return new ItemResponse.UpdateDTO(item);
     }
-
 
     @Transactional
     public ItemResponse.RemoveDTO remove(int itemId, Integer sessionUserId) {

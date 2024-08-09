@@ -28,12 +28,12 @@ public class Item {
     @NotBlank
     private String itemLocation;
 
-    private Integer oldQuantity;
-    private Integer inQuantity;
-    private Integer outQuantity;
+    private Integer oldQuantity; // 과거 재고
+    private Integer inQuantity;  // 입고 재고
+    private Integer outQuantity; // 출고 재고
 
     private String classification;
-    private Integer amount;
+    private Integer amount;      // 현재 재고
     private Boolean isActive;
 
     @ManyToOne
@@ -41,7 +41,7 @@ public class Item {
     private User user;
 
     @Column(name = "created_at", updatable = false, nullable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") // 직렬화 형식 지정
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
 
     @PrePersist
@@ -49,16 +49,19 @@ public class Item {
         createdAt = new Timestamp(System.currentTimeMillis());
     }
 
-    @Builder
-    public Item(String itemName, Integer amount, String classification, String itemLocation, Boolean isActive, Integer oldQuantity, Integer inQuantity, Integer outQuantity, User user) {
-        this.itemName = itemName;
-        this.amount = amount;
-        this.classification = classification;
-        this.itemLocation = itemLocation;
-        this.isActive = isActive;
-        this.oldQuantity = oldQuantity;
-        this.inQuantity = inQuantity;
-        this.outQuantity = outQuantity;
-        this.user = user;
+    public void updateStock(Integer inQuantity, Integer outQuantity) {
+        // `null` 값이 제공되면 기본값을 0으로 설정
+        int incoming = (inQuantity != null) ? inQuantity : 0;
+        int outgoing = (outQuantity != null) ? outQuantity : 0;
+
+        // 재고 업데이트를 통해 현재 재고(amount) 계산
+        this.oldQuantity = this.amount; // 이전 재고를 현재 재고로 설정
+
+        // 현재 재고 계산
+        this.amount = this.oldQuantity + incoming - outgoing;
+
+        // 입고 및 출고 값 설정
+        this.inQuantity = incoming;
+        this.outQuantity = outgoing;
     }
 }
