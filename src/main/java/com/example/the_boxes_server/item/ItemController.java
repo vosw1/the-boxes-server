@@ -22,8 +22,8 @@ public class ItemController {
         return ResponseEntity.ok(new ApiUtil<>(itemList));
     }
 
-    @PostMapping("/api/item/save")
-    public ResponseEntity<?> save(ItemRequest.SaveDTO reqDTO) {
+    @PostMapping("/api/item")
+    public ResponseEntity<?> save(@RequestBody ItemRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ItemResponse.SaveDTO resDTO = itemService.save(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(resDTO));

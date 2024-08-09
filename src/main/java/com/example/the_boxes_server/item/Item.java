@@ -18,7 +18,7 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int itemId;
+    private Integer itemId;
 
     @Size(max = 100)
     @NotBlank
@@ -28,12 +28,12 @@ public class Item {
     @NotBlank
     private String itemLocation;
 
-    private int oldQuantity;
-    private int inQuantity;
-    private int outQuantity;
+    private Integer oldQuantity;
+    private Integer inQuantity;
+    private Integer outQuantity;
 
     private String classification;
-    private int amount;
+    private Integer amount;
     private Boolean isActive;
 
     @ManyToOne
@@ -48,5 +48,17 @@ public class Item {
     protected void onCreate() {
         createdAt = new Timestamp(System.currentTimeMillis());
     }
-}
 
+    @Builder
+    public Item(String itemName, Integer amount, String classification, String itemLocation, Boolean isActive, Integer oldQuantity, Integer inQuantity, Integer outQuantity, User user) {
+        this.itemName = itemName;
+        this.amount = amount;
+        this.classification = classification;
+        this.itemLocation = itemLocation;
+        this.isActive = isActive;
+        this.oldQuantity = oldQuantity;
+        this.inQuantity = inQuantity;
+        this.outQuantity = outQuantity;
+        this.user = user;
+    }
+}

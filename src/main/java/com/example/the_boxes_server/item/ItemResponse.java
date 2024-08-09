@@ -7,16 +7,16 @@ public class ItemResponse {
 
     @Data
     public static class ListDTO {
-        private int itemId;
+        private Integer itemId;
         private String itemName;
-        private int amount;
+        private Integer amount;
         private String classification;
         private String itemLocation;
         private Boolean isActive;
 
-        private int oldQuantity;
-        private int inQuantity;
-        private int outQuantity;
+        private Integer oldQuantity;
+        private Integer inQuantity;
+        private Integer outQuantity;
         private Timestamp createdAt;
 
 
@@ -37,16 +37,16 @@ public class ItemResponse {
 
     @Data
     public static class SaveDTO {
-        private int itemId;
+        private Integer itemId;
         private String itemName;
-        private int amount;
+        private Integer amount;
         private String classification;
         private String itemLocation;
         private Boolean isActive;
         private Timestamp createdAt;
-        private int oldQuantity;
-        private int inQuantity;
-        private int outQuantity;
+        private Integer oldQuantity;
+        private Integer inQuantity;
+        private Integer outQuantity;
 
         public SaveDTO(Item item) {
             this.itemId = item.getItemId();
@@ -62,13 +62,12 @@ public class ItemResponse {
         }
     }
 
-
     @Data
     public static class RemoveDTO {
-        private int itemId;
+        private Integer itemId;
         private String itemName;
         private String classification;
-        private int amount;
+        private Integer amount;
         private String itemLocation;
         private Boolean isActive;
         private Timestamp createdAt;
@@ -86,16 +85,16 @@ public class ItemResponse {
 
     @Data
     public static class UpdateDTO {
-        private int itemId;
+        private Integer itemId;
         private String itemName;
-        private int amount;
+        private Integer amount;
         private String classification;
         private String itemLocation;
         private Boolean isActive;
         private Timestamp createdAt;
-        private int oldQuantity;
-        private int inQuantity;
-        private int outQuantity;
+        private Integer oldQuantity;
+        private Integer inQuantity;
+        private Integer outQuantity;
 
         public UpdateDTO(Item item) {
             this.itemId = item.getItemId();

@@ -25,9 +25,18 @@ public class ItemService {
     @Transactional
     public ItemResponse.SaveDTO save(ItemRequest.SaveDTO reqDTO, User sessionUser) {
         Item item = reqDTO.toEntity(sessionUser);
+
+        // 디버깅 로그 추가
+        System.out.println("DTO to Entity conversion: " + item);
+
         item = itemRepository.save(item);
+
+        // 저장된 엔티티 확인
+        System.out.println("Saved item: " + item);
+
         return new ItemResponse.SaveDTO(item);
     }
+
 
     @Transactional
     public ItemResponse.UpdateDTO update(int itemId, ItemRequest.UpdateDTO reqDTO) {
