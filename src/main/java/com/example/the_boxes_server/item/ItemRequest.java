@@ -2,8 +2,7 @@ package com.example.the_boxes_server.item;
 
 import com.example.the_boxes_server.user.User;
 import lombok.Data;
-
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class ItemRequest {
 
@@ -19,6 +18,7 @@ public class ItemRequest {
         private int oldQuantity;
         private int inQuantity;
         private int outQuantity;
+        private Timestamp createdAt;
     }
 
     @Data
@@ -29,7 +29,11 @@ public class ItemRequest {
         private String classification;
         private String itemLocation;
         private Boolean isActive;
-        private Date createdAt;
+
+        private int oldQuantity;
+        private int inQuantity;
+        private int outQuantity;
+        private Timestamp createdAt;
 
         public Item toEntity(User user) {
             return Item.builder().
@@ -38,6 +42,9 @@ public class ItemRequest {
                     itemLocation(itemLocation).
                     classification(classification).
                     amount(amount).
+                    oldQuantity(oldQuantity).
+                    inQuantity(inQuantity).
+                    outQuantity(outQuantity).
                     isActive(isActive)
                     .build();
         }
@@ -48,18 +55,25 @@ public class ItemRequest {
         private int itemId;
         private String itemName;
         private int amount;
-        private String itemLocation;
         private String classification;
+        private String itemLocation;
         private Boolean isActive;
-        private Date createdAt;
+
+        private int oldQuantity;
+        private int inQuantity;
+        private int outQuantity;
+        private Timestamp createdAt;
 
         public Item toEntity(User user) {
             return Item.builder().
                     itemId(itemId).
                     itemName(itemName).
-                    amount(amount).
-                    classification(classification).
                     itemLocation(itemLocation).
+                    classification(classification).
+                    amount(amount).
+                    oldQuantity(oldQuantity).
+                    inQuantity(inQuantity).
+                    outQuantity(outQuantity).
                     isActive(isActive)
                     .build();
         }

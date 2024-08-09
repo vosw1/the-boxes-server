@@ -1,7 +1,7 @@
 package com.example.the_boxes_server.item;
 
 import lombok.Data;
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class ItemResponse {
 
@@ -17,18 +17,20 @@ public class ItemResponse {
         private int oldQuantity;
         private int inQuantity;
         private int outQuantity;
-        private int createdAt;
+        private Timestamp createdAt;
 
 
         public ListDTO(Item item) {
             this.itemId = item.getItemId();
             this.itemName = item.getItemName();
             this.amount = item.getAmount();
+            this.classification = item.getClassification();
+            this.itemLocation = item.getItemLocation();
+            this.isActive = item.getIsActive();
             this.oldQuantity = item.getOldQuantity();
             this.outQuantity = item.getOutQuantity();
             this.inQuantity = item.getInQuantity();
-            this.itemLocation = item.getItemLocation();
-            this.isActive = item.getIsActive();
+            this.createdAt = item.getCreatedAt();
         }
     }
 
@@ -41,7 +43,10 @@ public class ItemResponse {
         private String classification;
         private String itemLocation;
         private Boolean isActive;
-        private Date createdAt;
+        private Timestamp createdAt;
+        private int oldQuantity;
+        private int inQuantity;
+        private int outQuantity;
 
         public SaveDTO(Item item) {
             this.itemId = item.getItemId();
@@ -50,6 +55,9 @@ public class ItemResponse {
             this.classification = item.getClassification();
             this.itemLocation = item.getItemLocation();
             this.isActive = item.getIsActive();
+            this.oldQuantity = item.getOldQuantity();
+            this.outQuantity = item.getOutQuantity();
+            this.inQuantity = item.getInQuantity();
             this.createdAt = item.getCreatedAt();
         }
     }
@@ -63,7 +71,8 @@ public class ItemResponse {
         private int amount;
         private String itemLocation;
         private Boolean isActive;
-        private Date createdAt;
+        private Timestamp createdAt;
+
 
         public RemoveDTO(Item item) {
             this.itemId = item.getItemId();
@@ -83,7 +92,10 @@ public class ItemResponse {
         private String classification;
         private String itemLocation;
         private Boolean isActive;
-        private Date createdAt;
+        private Timestamp createdAt;
+        private int oldQuantity;
+        private int inQuantity;
+        private int outQuantity;
 
         public UpdateDTO(Item item) {
             this.itemId = item.getItemId();
@@ -92,6 +104,9 @@ public class ItemResponse {
             this.classification = item.getClassification();
             this.itemLocation = item.getItemLocation();
             this.isActive = item.getIsActive();
+            this.oldQuantity = item.getOldQuantity();
+            this.outQuantity = item.getOutQuantity();
+            this.inQuantity = item.getInQuantity();
             this.createdAt = item.getCreatedAt();
         }
     }

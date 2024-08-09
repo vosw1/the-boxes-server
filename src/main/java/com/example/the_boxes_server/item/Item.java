@@ -1,8 +1,8 @@
 package com.example.the_boxes_server.item;
 
-import java.util.Date;
-
+import java.sql.Timestamp;
 import com.example.the_boxes_server.user.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -18,34 +18,35 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int itemId; // ID 필드, 자동 생성
+    private int itemId;
 
     @Size(max = 100)
     @NotBlank
-    private String itemName; // 아이템 이름, 빈 문자열 불가
+    private String itemName;
 
     @Size(max = 100)
     @NotBlank
-    private String itemLocation; // 아이템 위치
+    private String itemLocation;
 
     private int oldQuantity;
     private int inQuantity;
     private int outQuantity;
 
-    private String classification; // 아이템 분류
+    private String classification;
+    private int amount;
+    private Boolean isActive;
 
-    private int amount; // 수량
-
-    private Boolean isActive; // 활성 상태
     @ManyToOne
     @JoinColumn(name = "user_user_id")
-    private User user; // 활성 상태
+    private User user;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt; // 생성 일시
+    @Column(name = "created_at", updatable = false, nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") // 직렬화 형식 지정
+    private Timestamp createdAt;
 
     @PrePersist
     protected void onCreate() {
-        createdAt = new Date(); // 생성 시 일시 설정
+        createdAt = new Timestamp(System.currentTimeMillis());
     }
 }
+
