@@ -42,14 +42,27 @@ public class ItemService {
     public ItemResponse.UpdateDTO update(int itemId, ItemRequest.UpdateDTO reqDTO) {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new Exception404("해당 품목을 찾을 수 없습니다"));
-        item.setItemName(reqDTO.getItemName());
-        item.setAmount(reqDTO.getAmount());
-        item.setIsActive(reqDTO.getIsActive());
 
-        itemRepository.save(item);
+        // 업데이트 전 로그
+        System.out.println("Before update: " + item);
+
+        if (reqDTO.getItemName() != null) item.setItemName(reqDTO.getItemName());
+        if (reqDTO.getAmount() != null) item.setAmount(reqDTO.getAmount());
+        if (reqDTO.getClassification() != null) item.setClassification(reqDTO.getClassification());
+        if (reqDTO.getItemLocation() != null) item.setItemLocation(reqDTO.getItemLocation());
+        if (reqDTO.getIsActive() != null) item.setIsActive(reqDTO.getIsActive());
+        if (reqDTO.getOldQuantity() != null) item.setOldQuantity(reqDTO.getOldQuantity());
+        if (reqDTO.getInQuantity() != null) item.setInQuantity(reqDTO.getInQuantity());
+        if (reqDTO.getOutQuantity() != null) item.setOutQuantity(reqDTO.getOutQuantity());
+
+        item = itemRepository.save(item);
+
+        // 업데이트 후 로그
+        System.out.println("After update: " + item);
 
         return new ItemResponse.UpdateDTO(item);
     }
+
 
     @Transactional
     public ItemResponse.RemoveDTO remove(int itemId, Integer sessionUserId) {
