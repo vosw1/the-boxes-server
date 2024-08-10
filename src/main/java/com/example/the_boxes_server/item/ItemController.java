@@ -23,6 +23,18 @@ public class ItemController {
         return ResponseEntity.ok(new ApiUtil<>(itemList));
     }
 
+    @GetMapping("/classification")
+    public ResponseEntity<?> listByClassification(@RequestParam String classification) {
+        List<ItemResponse.ListDTO> itemList = itemService.listByClassification(classification);
+        return ResponseEntity.ok(new ApiUtil<>(itemList));
+    }
+
+    @GetMapping("/status")
+    public ResponseEntity<?> listByStatus(@RequestParam Item.ItemStatus status) {
+        List<ItemResponse.ListDTO> itemList = itemService.listByStatus(status);
+        return ResponseEntity.ok(new ApiUtil<>(itemList));
+    }
+
     @PostMapping
     public ResponseEntity<?> save(@RequestBody ItemRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
