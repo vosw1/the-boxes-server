@@ -7,11 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
-/**
- * 품목에 대한 현재재고 나타내는 엔티티 클래스
- */
 @Entity
 @Table(name = "inventory")
 @Data
@@ -30,9 +28,21 @@ public class Inventory {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    // 현재 재고 수량
+    // 변동 전 재고 수량
+    @Column(name = "previous_quantity")
+    private Integer previousQuantity;
+
+    // 변동 후 재고 수량
     @Column(name = "current_quantity")
     private Integer currentQuantity;
+
+    // 입고 수량
+    @Column(name = "incoming_quantity")
+    private Integer incomingQuantity;
+
+    // 출고 수량
+    @Column(name = "outgoing_quantity")
+    private Integer outgoingQuantity;
 
     // 재고 변경을 수행한 사용자와 연관관계
     @ManyToOne
@@ -46,5 +56,20 @@ public class Inventory {
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
+    }
+
+    // 재고 업데이트 메서드 (현재 재고량 변경)
+    public void updateInventory(Integer inQuantity, Integer outQuantity) {
+        // 입고 및 출고 수량이 null인 경우 0으로 설정
+        int incoming = (inQuantity != null) ? inQuantity : 0;
+        int outgoing = (outQuantity != null) ? outQuantity : 0;
+
+        // 이전 재고량을 현재 재고량으로 설정
+        Integer previousQuantity = this.currentQuantity;
+
+        // 현재 재고량 계산
+        this.currentQuantity = previousQuantity + incoming - outgoing;
+
+        // 필요한 경우 입고 및 출고 수량 설정 (추가 필드 필요)
     }
 }

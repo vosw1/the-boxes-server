@@ -13,11 +13,11 @@ import java.util.List;
 public interface InventoryRepository extends JpaRepository<Inventory, Integer> {
 
     /**
-     * @param date 조회할 날짜
+     * @param date 조회할 날짜 (시간 부분을 무시하고 날짜만 기준으로 조회)
      * @return 해당 날짜의 재고 리스트
      */
-    @Query("SELECT i FROM Inventory i WHERE i.createdAt = :date")
-    List<Inventory> findByDate(@Param("date") LocalDateTime date);
+    @Query("SELECT i FROM Inventory i WHERE FUNCTION('DATE', i.createdAt) = FUNCTION('DATE', :date)")
+    List<Inventory> findByDateIgnoringTime(@Param("date") LocalDateTime date);
 
     /**
      * @param startDate 시작 날짜
