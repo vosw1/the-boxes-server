@@ -49,11 +49,31 @@ public class User {
     private String email;
 
     // 사용자 직책
+    @Enumerated(EnumType.STRING)
     @Column(length = 50)
-    private String position;
+    private UserPosition position;
+
+    // 사용자 상태 (근무중 / 퇴사한)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private UserStatus status; // WORKING = 근무중, RETIRED = 퇴사한
 
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    // 사용자 상태를 나타내는 Enum
+    public enum UserStatus {
+        WORKING,  // 근무중
+        RETIRED   // 퇴사한
+    }
+
+    // 직책을 나타내는 Enum
+    public enum UserPosition {
+        ADMIN,       // 관리자
+        MANAGER,     // 매니저
+        EMPLOYEE,    // 직원
+        INTERN       // 인턴
+    }
 
     @Builder
     public User(
@@ -65,7 +85,8 @@ public class User {
             String phone,
             String address,
             String email,
-            String position
+            UserPosition position, // 열거형으로 직책
+            UserStatus status // 사용자 상태
     ) {
         this.userId = userId;
         this.username = username;
@@ -75,6 +96,7 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.email = email;
-        this.position = position;
+        this.position = position; // 열거형으로 직책 설정
+        this.status = status; // 상태 설정
     }
 }

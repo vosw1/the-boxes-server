@@ -7,12 +7,13 @@ public class UserResponse {
 
     @Data
     public static class LoginDTO {
-        private Integer id; // 유저 번호
-        private String username; // 유저 이름
-        private String email; // 이메일 (로그인 할 때 아이디로 사용)
+        private Integer id; // 유저 ID
+        private String username; // 유저 아이디
+        private String email; // 이메일
         private String name; // 회원 이름
         private String phone; // 전화번호
         private LocalDateTime createdAt; // 유저 가입 일자
+        private User.UserPosition position; // 직책 (Enum 사용)
 
         public LoginDTO(User user) {
             this.id = user.getUserId();
@@ -21,16 +22,18 @@ public class UserResponse {
             this.name = user.getName();
             this.phone = user.getPhone();
             this.createdAt = user.getCreatedAt();
+            this.position = user.getPosition(); // 직책 추가
         }
     }
 
     @Data
     public static class JoinDTO {
-        private Integer id; // 유저 번호
-        private String email; // 이메일 (로그인 할 때 아이디로 사용)
+        private Integer id; // 유저 ID
+        private String email; // 이메일
         private String name; // 회원 이름
         private String phone; // 전화번호
         private LocalDateTime createdAt; // 유저 가입 일자
+        private User.UserPosition position; // 직책 (Enum 사용)
 
         public JoinDTO(User user) {
             this.id = user.getUserId();
@@ -38,6 +41,7 @@ public class UserResponse {
             this.name = user.getName();
             this.phone = user.getPhone();
             this.createdAt = user.getCreatedAt();
+            this.position = user.getPosition(); // 직책 추가
         }
     }
 }

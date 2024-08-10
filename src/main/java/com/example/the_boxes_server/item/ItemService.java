@@ -37,9 +37,9 @@ public class ItemService {
         return new ItemResponse.SaveDTO(item);
     }
 
-
     @Transactional
     public ItemResponse.UpdateDTO update(int itemId, ItemRequest.UpdateDTO reqDTO) {
+        // 품목 조회
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new Exception404("해당 품목을 찾을 수 없습니다"));
 
@@ -50,13 +50,10 @@ public class ItemService {
         if (reqDTO.getItemName() != null) item.setItemName(reqDTO.getItemName());
         if (reqDTO.getClassification() != null) item.setClassification(reqDTO.getClassification());
         if (reqDTO.getItemLocation() != null) item.setItemLocation(reqDTO.getItemLocation());
-        if (reqDTO.getIsActive() != null) item.setIsActive(reqDTO.getIsActive());
+        if (reqDTO.getStatus() != null) item.setStatus(reqDTO.getStatus());
 
-        // 재고 업데이트 (입고와 출고)
-        item.updateStock(reqDTO.getInQuantity(), reqDTO.getOutQuantity());
-
-        // 엔티티 저장
-        item = itemRepository.save(item);
+        // 엔티티 저장 (필요시)
+        // item = itemRepository.save(item); // JPA의 변경 감지 기능을 통해 자동으로 저장됨
 
         // 업데이트 후 로그
         System.out.println("After update: " + item);

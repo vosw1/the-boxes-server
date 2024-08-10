@@ -1,4 +1,4 @@
 package com.example.the_boxes_server.inventory;
 
-public class InwentoryController {
+public class InventoryController {
 }
