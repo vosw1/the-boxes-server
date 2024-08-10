@@ -1,67 +1,57 @@
 package com.example.the_boxes_server.item;
 
-import java.sql.Timestamp;
 import com.example.the_boxes_server.user.User;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "item")
+@Table(name = "items")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Item {
 
+    // 품목 ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer itemId;
 
-    @Size(max = 100)
-    @NotBlank
+    // 품목 이름
+    @Column(name = "item_name", length = 100, nullable = false)
     private String itemName;
 
-    @Size(max = 100)
-    @NotBlank
+    // 아이템 제조사
+    @Column(length = 100)
+    private String manufacturer;
+
+    // 품목 위치
+    @Column(name = "item_location", length = 100)
     private String itemLocation;
 
-    private Integer oldQuantity; // 과거 재고
-    private Integer inQuantity;  // 입고 재고
-    private Integer outQuantity; // 출고 재고
-
+    // 품목 분류
+    @Column(length = 100)
     private String classification;
-    private Integer amount;      // 현재 재고
-    private Boolean isActive;
 
+    // 현재 재고 수량
+    @Column(name = "current_quantity")
+    private Integer currentQuantity;
+
+    // 아이템을 추가한 사용자
     @ManyToOne
-    @JoinColumn(name = "user_user_id")
+    @JoinColumn(name = "userId")
     private User user;
 
     @Column(name = "created_at", updatable = false, nullable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 
     @PrePersist
     protected void onCreate() {
-        createdAt = new Timestamp(System.currentTimeMillis());
-    }
-
-    public void updateStock(Integer inQuantity, Integer outQuantity) {
-        // `null` 값이 제공되면 기본값을 0으로 설정
-        int incoming = (inQuantity != null) ? inQuantity : 0;
-        int outgoing = (outQuantity != null) ? outQuantity : 0;
-
-        // 재고 업데이트를 통해 현재 재고(amount) 계산
-        this.oldQuantity = this.amount; // 이전 재고를 현재 재고로 설정
-
-        // 현재 재고 계산
-        this.amount = this.oldQuantity + incoming - outgoing;
-
-        // 입고 및 출고 값 설정
-        this.inQuantity = incoming;
-        this.outQuantity = outgoing;
+        createdAt = LocalDateTime.now();
     }
 }
