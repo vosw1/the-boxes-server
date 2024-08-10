@@ -36,14 +36,6 @@ public class Inventory {
     @Column(name = "current_quantity")
     private Integer currentQuantity;
 
-    // 입고 수량
-    @Column(name = "incoming_quantity")
-    private Integer incomingQuantity;
-
-    // 출고 수량
-    @Column(name = "outgoing_quantity")
-    private Integer outgoingQuantity;
-
     // 재고 변경을 수행한 사용자와 연관관계
     @ManyToOne
     @JoinColumn(name = "user_id")

@@ -57,7 +57,7 @@ public interface HistoryRepository extends JpaRepository<History, Integer> {
      * @param reason 변동 사유
      * @return 해당 사유를 포함하는 변동 내역 리스트
      */
-    @Query("SELECT h FROM History h WHERE h.reason LIKE %:reason%")
+    @Query("SELECT h FROM History h JOIN h.inOut io WHERE io.reason LIKE %:reason%")
     List<History> findByReason(@Param("reason") String reason);
 
     /**
@@ -66,7 +66,7 @@ public interface HistoryRepository extends JpaRepository<History, Integer> {
      * @param reason 변동 사유
      * @return 해당 날짜 범위와 사유를 포함하는 변동 내역 리스트
      */
-    @Query("SELECT h FROM History h WHERE h.createdAt BETWEEN :startDate AND :endDate AND h.reason LIKE %:reason%")
+    @Query("SELECT h FROM History h JOIN h.inOut io WHERE h.createdAt BETWEEN :startDate AND :endDate AND io.reason LIKE %:reason%")
     List<History> findByDateRangeAndReason(
             @Param("startDate") LocalDateTime startDate,
             @Param("endDate") LocalDateTime endDate,

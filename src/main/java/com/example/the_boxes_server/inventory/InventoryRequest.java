@@ -1,16 +1,20 @@
 package com.example.the_boxes_server.inventory;
 
-import com.example.the_boxes_server.inout.InOut;
+import com.example.the_boxes_server.item.Item;
+import com.example.the_boxes_server.user.User;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 public class InventoryRequest {
 
     @Data
     public class InventoryeDTO {
-        private Integer itemId; // 품목 ID
-        private Integer quantity; // 입고/출고 수량
-        private InOut.OrderType orderType; // 입고 또는 출고 타입
-        private Integer userId; // 사용자 ID
-        private String reason; // 사유 (선택적)
+        private Integer inventoryId; // 품목 ID
+        private Item item; // 품목 ID
+        private Integer previousQuantity; // 변동 전 재고 수량
+        private Integer currentQuantity; // 변동 후 재고 수량
+        private User user; // 사용자 ID
+        private LocalDateTime createdAt; // 사유 (선택적)
     }
 }
