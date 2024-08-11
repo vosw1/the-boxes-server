@@ -17,7 +17,7 @@ public interface InventoryRepository extends JpaRepository<Inventory, Integer> {
      * @return 해당 날짜의 재고 리스트
      */
     @Query("SELECT i FROM Inventory i WHERE FUNCTION('DATE', i.createdAt) = FUNCTION('DATE', :date)")
-    List<Inventory> findByDateIgnoringTime(@Param("date") LocalDateTime date);
+    List<Inventory> findByDate(@Param("date") LocalDateTime date);
 
     /**
      * @param startDate 시작 날짜
@@ -32,20 +32,7 @@ public interface InventoryRepository extends JpaRepository<Inventory, Integer> {
      * @return 해당 품목 상태의 재고 리스트
      */
     @Query("SELECT i FROM Inventory i JOIN i.item it WHERE it.status = :status")
-    List<Inventory> findByItemStatus(@Param("status") Item.ItemStatus status);
-
-    /**
-     * @param startDate 시작 날짜
-     * @param endDate 종료 날짜
-     * @param status 품목 상태
-     * @return 해당 날짜 범위와 품목 상태의 재고 리스트
-     */
-    @Query("SELECT i FROM Inventory i JOIN i.item it WHERE i.createdAt BETWEEN :startDate AND :endDate AND it.status = :status")
-    List<Inventory> findByDateRangeAndItemStatus(
-            @Param("startDate") LocalDateTime startDate,
-            @Param("endDate") LocalDateTime endDate,
-            @Param("status") Item.ItemStatus status
-    );
+    List<Inventory> findByStatus(@Param("status") Item.ItemStatus status);
 
     /**
      * @param userId 사용자 ID
