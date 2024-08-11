@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -15,7 +13,6 @@ import java.time.LocalDateTime;
 @Table(name = "users")
 public class User {
 
-    // 사용자 ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
@@ -34,7 +31,7 @@ public class User {
 
     // 사용자 생년월일
     @Column(name = "birthdate")
-    private LocalDate birthdate;
+    private LocalDateTime birthdate;
 
     // 사용자 전화번호
     @Column(length = 20)
@@ -81,7 +78,7 @@ public class User {
             String username,
             String password,
             String name,
-            LocalDate birthdate,
+            LocalDateTime birthdate,
             String phone,
             String address,
             String email,
@@ -96,7 +93,7 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.email = email;
-        this.position = position; // 열거형으로 직책 설정
+        this.position = position;
         this.status = status; // 상태 설정
     }
 }

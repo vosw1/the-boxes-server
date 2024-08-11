@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,7 +25,10 @@ public interface HistoryRepository extends JpaRepository<History, Integer> {
      * @return 해당 날짜 범위의 변동 내역 리스트
      */
     @Query("SELECT h FROM History h WHERE h.createdAt BETWEEN :startDate AND :endDate")
-    List<History> findByDateRange(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+    List<History> findByDateRange(
+            @Param("startDate") LocalDateTime startDate,
+            @Param("endDate") LocalDateTime endDate
+    );
 
     /**
      * @param status 품목 상태
@@ -50,7 +54,7 @@ public interface HistoryRepository extends JpaRepository<History, Integer> {
      * @param userId 사용자 ID
      * @return 해당 사용자 ID의 변동 내역 리스트
      */
-    @Query("SELECT h FROM History h JOIN h.user u WHERE u.userId = :userId")
+    @Query("SELECT h FROM History h WHERE h.user.userId = :userId") // Reference user.id
     List<History> findByUserId(@Param("userId") Integer userId);
 
     /**
