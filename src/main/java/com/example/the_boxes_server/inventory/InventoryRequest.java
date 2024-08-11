@@ -16,5 +16,14 @@ public class InventoryRequest {
         private Integer currentQuantity; // 변동 후 재고 수량
         private User user; // 사용자 ID
         private LocalDateTime createdAt; // 사유 (선택적)
+
+        public InventoryeDTO(Inventory inventory) {
+            this.inventoryId = inventory.getInventoryId();
+            this.item = inventory.getItem();
+            this.previousQuantity = inventory.getPreviousQuantity();
+            this.currentQuantity = inventory.getCurrentQuantity();
+            this.user = inventory.getUser();
+            this.createdAt = inventory.getCreatedAt();
+        }
     }
 }

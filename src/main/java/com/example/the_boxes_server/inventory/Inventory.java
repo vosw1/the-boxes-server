@@ -21,7 +21,7 @@ public class Inventory {
     // 재고 ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer inventoryId;
 
     // 해당 품목과의 연관관계
     @ManyToOne
