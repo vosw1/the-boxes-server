@@ -3,8 +3,6 @@ package com.example.the_boxes_server.user;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class UserRequest {

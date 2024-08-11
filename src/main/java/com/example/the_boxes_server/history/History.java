@@ -11,9 +11,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
-/**
- * 모든 품목들에 대한 기록을 나타내는 엔티티 클래스
- */
 @Entity
 @Table(name = "history")
 @Data
@@ -30,10 +27,6 @@ public class History {
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
     @ManyToOne
     @JoinColumn(name = "in_out_id")

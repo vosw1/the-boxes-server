@@ -1,6 +1,5 @@
 package com.example.the_boxes_server.inventory;
 
-import com.example.the_boxes_server.inout.InOut;
 import com.example.the_boxes_server.item.Item;
 import com.example.the_boxes_server.user.User;
 import jakarta.persistence.*;
@@ -27,15 +26,6 @@ public class Inventory {
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
-
-    // 재고 변경을 수행한 사용자와 연관관계
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    // 변동 전 재고 수량
-    @Column(name = "previous_quantity")
-    private Integer previousQuantity;
 
     // 변동 후 재고 수량
     @Column(name = "current_quantity")

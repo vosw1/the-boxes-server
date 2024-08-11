@@ -26,10 +26,9 @@ public class InventoryController {
             @RequestParam Optional<LocalDate> date,
             @RequestParam Optional<LocalDate> startDate,
             @RequestParam Optional<LocalDate> endDate,
-            @RequestParam Optional<Item.ItemStatus> status,
-            @RequestParam Optional<Integer> userId) {
+            @RequestParam Optional<Item.ItemStatus> status) {
 
-        List<InventoryResponse.ListDTO> inventoryeDTOList = inventoryService.list(date, startDate, endDate, status, userId);
+        List<InventoryResponse.ListDTO> inventoryeDTOList = inventoryService.list(date, startDate, endDate, status);
 
         return ResponseEntity.ok(new ApiUtil<>(inventoryeDTOList));
     }

@@ -8,9 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
-/**
- * 품목을 나타내는 엔티티 클래스
- */
 @Entity
 @Table(name = "item")
 @Data
@@ -39,10 +36,6 @@ public class Item {
     // 품목 분류
     @Column(length = 100)
     private String classification;
-
-    // 현재 재고 수량
-    @Column(name = "current_quantity")
-    private Integer currentQuantity;
 
     // 아이템을 추가한 사용자
     // 품목 등록한 사용자

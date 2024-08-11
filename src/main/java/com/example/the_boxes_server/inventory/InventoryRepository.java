@@ -33,11 +33,4 @@ public interface InventoryRepository extends JpaRepository<Inventory, Integer> {
      */
     @Query("SELECT i FROM Inventory i JOIN i.item it WHERE it.status = :status")
     List<Inventory> findByStatus(@Param("status") Item.ItemStatus status);
-
-    /**
-     * @param userId 사용자 ID
-     * @return 해당 사용자 ID의 재고 리스트
-     */
-    @Query("SELECT i FROM Inventory i WHERE i.user.userId = :userId")
-    List<Inventory> findByUserId(@Param("userId") Integer userId);
 }

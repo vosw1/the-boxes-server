@@ -22,8 +22,7 @@ public class InventoryService {
     public List<InventoryResponse.ListDTO> list(Optional<LocalDate> date,
                                                       Optional<LocalDate> startDate,
                                                       Optional<LocalDate> endDate,
-                                                      Optional<Item.ItemStatus> status,
-                                                      Optional<Integer> userId) {
+                                                      Optional<Item.ItemStatus> status) {
         List<Inventory> inventories;
 
         if (date.isPresent()) {
@@ -34,8 +33,6 @@ public class InventoryService {
             inventories = inventoryRepository.findByDateRange(startDate.get().atStartOfDay(), endDate.get().atTime(23, 59, 59));
         } else if (status.isPresent()) {
             inventories = inventoryRepository.findByStatus(status.get());
-        } else if (userId.isPresent()) {
-            inventories = inventoryRepository.findByUserId(userId.get());
         } else {
             inventories = inventoryRepository.findAll();
         }

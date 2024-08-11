@@ -51,13 +51,6 @@ public interface HistoryRepository extends JpaRepository<History, Integer> {
     );
 
     /**
-     * @param userId 사용자 ID
-     * @return 해당 사용자 ID의 변동 내역 리스트
-     */
-    @Query("SELECT h FROM History h WHERE h.user.userId = :userId") // Reference user.id
-    List<History> findByUserId(@Param("userId") Integer userId);
-
-    /**
      * @param reason 변동 사유
      * @return 해당 사유를 포함하는 변동 내역 리스트
      */

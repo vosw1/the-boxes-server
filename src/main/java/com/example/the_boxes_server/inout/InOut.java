@@ -7,12 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
-/**
- * 입출고 지시를 나타내는 엔티티 클래스
- */
 @Entity
 @Table(name = "in_out")
 @Data
@@ -21,7 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class InOut {
 
-    // 입출고 지시 ID (기본키)
+    // 입출고 지시 ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
