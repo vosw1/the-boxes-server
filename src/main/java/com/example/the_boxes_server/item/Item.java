@@ -8,9 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
-/**
- * 품목을 나타내는 엔티티 클래스
- */
 @Entity
 @Table(name = "item")
 @Data

@@ -1,6 +1,5 @@
 package com.example.the_boxes_server.inventory;
 
-import com.example.the_boxes_server.inout.InOut;
 import com.example.the_boxes_server.item.Item;
 import com.example.the_boxes_server.user.User;
 import jakarta.persistence.*;

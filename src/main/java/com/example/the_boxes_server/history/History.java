@@ -11,9 +11,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
-/**
- * 모든 품목들에 대한 기록을 나타내는 엔티티 클래스
- */
 @Entity
 @Table(name = "history")
 @Data

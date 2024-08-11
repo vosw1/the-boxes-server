@@ -7,12 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
-/**
- * 입출고 지시를 나타내는 엔티티 클래스
- */
 @Entity
 @Table(name = "in_out")
 @Data
