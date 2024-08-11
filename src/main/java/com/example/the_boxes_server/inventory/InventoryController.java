@@ -20,6 +20,7 @@ public class InventoryController {
 
     private final InventoryService inventoryService;
 
+    // 전체 및 조건별 조회
     @GetMapping
     public ResponseEntity<?> findAll(
             @RequestParam Optional<LocalDate> date,

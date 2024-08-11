@@ -15,24 +15,20 @@ public class ItemService {
 
     private final ItemRepository itemRepository;
 
+    // 전체 및 조건별 조회
     @Transactional
-    public List<ItemResponse.ListDTO> list() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "itemId"); // 필드 이름 수정
-        List<Item> itemList = itemRepository.findAll(sort);
-        return itemList.stream().map(ItemResponse.ListDTO::new).collect(Collectors.toList());
-    }
-
-    @Transactional
-    public List<ItemResponse.ListDTO> listByClassification(String classification) {
-        List<Item> items = itemRepository.findByClassification(classification);
-        System.out.println("Items found by classification '" + classification + "': " + items); // 로그 추가
-        return items.stream().map(ItemResponse.ListDTO::new).collect(Collectors.toList());
-    }
-
-    @Transactional
-    public List<ItemResponse.ListDTO> listByStatus(Item.ItemStatus status) {
-        List<Item> items = itemRepository.findByStatus(status);
-        System.out.println("Items found by status '" + status + "': " + items); // 로그 추가
+    public List<ItemResponse.ListDTO> list(String classification, Item.ItemStatus status) {
+        List<Item> items;
+        if (classification != null) {
+            items = itemRepository.findByClassification(classification);
+            System.out.println("Items found by classification '" + classification + "': " + items);
+        } else if (status != null) {
+            items = itemRepository.findByStatus(status);
+            System.out.println("Items found by status '" + status + "': " + items);
+        } else {
+            Sort sort = Sort.by(Sort.Direction.DESC, "itemId");
+            items = itemRepository.findAll(sort);
+        }
         return items.stream().map(ItemResponse.ListDTO::new).collect(Collectors.toList());
     }
 
@@ -66,8 +62,7 @@ public class ItemService {
         if (reqDTO.getItemLocation() != null) item.setItemLocation(reqDTO.getItemLocation());
         if (reqDTO.getStatus() != null) item.setStatus(reqDTO.getStatus());
 
-        // 엔티티 저장 (필요시)
-        // item = itemRepository.save(item); // JPA의 변경 감지 기능을 통해 자동으로 저장됨
+        item = itemRepository.save(item); // JPA의 변경 감지 기능을 통해 자동으로 저장됨
 
         // 업데이트 후 로그
         System.out.println("After update: " + item);

@@ -17,24 +17,13 @@ public class ItemController {
     private final HttpSession session;
     private final ItemService itemService;
 
-    // 전체 조회
+    // 전체 및 조건 조회
     @GetMapping
-    public ResponseEntity<?> list() {
-        List<ItemResponse.ListDTO> itemList = itemService.list();
-        return ResponseEntity.ok(new ApiUtil<>(itemList));
-    }
+    public ResponseEntity<?> list(
+            @RequestParam(required = false) String classification,
+            @RequestParam(required = false) Item.ItemStatus status) {
 
-    // 분류별 조회
-    @GetMapping("/classification")
-    public ResponseEntity<?> listByClassification(@RequestParam String classification) {
-        List<ItemResponse.ListDTO> itemList = itemService.listByClassification(classification);
-        return ResponseEntity.ok(new ApiUtil<>(itemList));
-    }
-
-    // 상태별 조회
-    @GetMapping("/status")
-    public ResponseEntity<?> listByStatus(@RequestParam Item.ItemStatus status) {
-        List<ItemResponse.ListDTO> itemList = itemService.listByStatus(status);
+        List<ItemResponse.ListDTO> itemList = itemService.list(classification, status);
         return ResponseEntity.ok(new ApiUtil<>(itemList));
     }
 

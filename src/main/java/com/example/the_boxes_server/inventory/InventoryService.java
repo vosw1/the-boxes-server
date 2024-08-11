@@ -17,6 +17,7 @@ public class InventoryService {
 
     private final InventoryRepository inventoryRepository;
 
+    // 전체 및 조건별 조회
     @Transactional(readOnly = true)
     public List<InventoryResponse.ListDTO> list(Optional<LocalDate> date,
                                                       Optional<LocalDate> startDate,

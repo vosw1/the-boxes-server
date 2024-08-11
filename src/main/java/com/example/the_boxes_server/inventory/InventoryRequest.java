@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 public class InventoryRequest {
 
+    // 전체 및 조건별 조회
     @Data
     public class InventoryeDTO {
         private Integer inventoryId; // 품목 ID
