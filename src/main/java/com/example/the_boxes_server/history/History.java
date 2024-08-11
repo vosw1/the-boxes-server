@@ -3,7 +3,6 @@ package com.example.the_boxes_server.history;
 import com.example.the_boxes_server.inout.InOut;
 import com.example.the_boxes_server.inventory.Inventory;
 import com.example.the_boxes_server.item.Item;
-import com.example.the_boxes_server.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +21,7 @@ public class History {
     // 변동 내역 ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer historyId;
 
     @ManyToOne
     @JoinColumn(name = "item_id")

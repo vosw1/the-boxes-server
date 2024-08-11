@@ -1,5 +1,6 @@
 package com.example.the_boxes_server.item;
 
+import com.example.the_boxes_server.user.User;
 import com.example.the_boxes_server.user.UserResponse;
 import lombok.Data;
 import java.time.LocalDateTime;
@@ -14,8 +15,8 @@ public class ItemResponse {
         private String itemLocation; // 품목 위치
         private String classification; // 품목 분류
         private String status; // 품목 상태
-        private LocalDateTime createdAt; // 품목 생성 일시
         private UserResponse.LoginDTO user; // 사용자 정보
+        private LocalDateTime createdAt; // 품목 생성 일시
 
         public ListDTO(Item item) {
             this.itemId = item.getItemId();
@@ -24,8 +25,8 @@ public class ItemResponse {
             this.itemLocation = item.getItemLocation();
             this.classification = item.getClassification();
             this.status = item.getStatus().name();
-            this.createdAt = item.getCreatedAt();
             this.user = new UserResponse.LoginDTO(item.getUser());
+            this.createdAt = item.getCreatedAt();
         }
     }
 
