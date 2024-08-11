@@ -1,5 +1,6 @@
 package com.example.the_boxes_server.inventory;
 
+import com.example.the_boxes_server.inout.InOut;
 import com.example.the_boxes_server.item.Item;
 import com.example.the_boxes_server.user.User;
 import jakarta.persistence.*;
@@ -7,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -28,6 +28,11 @@ public class Inventory {
     @JoinColumn(name = "item_id")
     private Item item;
 
+    // 재고 변경을 수행한 사용자와 연관관계
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     // 변동 전 재고 수량
     @Column(name = "previous_quantity")
     private Integer previousQuantity;
@@ -36,10 +41,6 @@ public class Inventory {
     @Column(name = "current_quantity")
     private Integer currentQuantity;
 
-    // 재고 변경을 수행한 사용자와 연관관계
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
     // 재고 변경 일시
     @Column(name = "created_at", updatable = false, nullable = false)
@@ -51,6 +52,11 @@ public class Inventory {
     }
 
     // 재고 업데이트 메서드 (현재 재고량 변경)
+    /**
+     * 입고 및 출고 수량을 업데이트 -> 재고 조정
+     * @param inQuantity  입고 수량
+     * @param outQuantity 출고 수량
+     */
     public void updateInventory(Integer inQuantity, Integer outQuantity) {
         // 입고 및 출고 수량이 null인 경우 0으로 설정
         int incoming = (inQuantity != null) ? inQuantity : 0;

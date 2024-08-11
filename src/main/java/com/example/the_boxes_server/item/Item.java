@@ -12,16 +12,16 @@ import java.time.LocalDateTime;
  * 품목을 나타내는 엔티티 클래스
  */
 @Entity
-@Table(name = "item") // 데이터베이스 테이블명
+@Table(name = "item")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Item {
 
-    // 품목 ID (기본키)
+    // 품목 ID
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 증가
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer itemId;
 
     // 품목 이름
@@ -40,9 +40,14 @@ public class Item {
     @Column(length = 100)
     private String classification;
 
+    // 현재 재고 수량
+    @Column(name = "current_quantity")
+    private Integer currentQuantity;
+
+    // 아이템을 추가한 사용자
     // 품목 등록한 사용자
     @ManyToOne
-    @JoinColumn(name = "user_id") // 외래키 컬럼명
+    @JoinColumn(name = "user_id")
     private User user;
 
     // 품목 상태 (사용중 또는 사용안함)
@@ -56,6 +61,7 @@ public class Item {
 
     @PrePersist
     protected void onCreate() {
+        createdAt = LocalDateTime.now();
         createdAt = LocalDateTime.now(); // 생성 시 현재 시간 설정
     }
 

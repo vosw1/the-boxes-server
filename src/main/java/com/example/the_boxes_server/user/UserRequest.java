@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class UserRequest {
 
@@ -47,7 +48,7 @@ public class UserRequest {
 
         @NotNull
         @Past(message = "생년월일은 과거여야 합니다.")
-        private LocalDate birthdate; // LocalDate 타입으로 수정
+        private LocalDateTime birthdate; // LocalDate 타입으로 수정
 
         @NotEmpty(message = "전화번호가 공백일 수 없습니다")
         @Pattern(regexp = "^\\d{3}-\\d{3,4}-\\d{4}$", message = "전화번호 형식이 올바르지 않습니다")
