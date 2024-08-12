@@ -1,7 +1,7 @@
 package com.example.the_boxes_server.inventory;
 
+import com.example.the_boxes_server.inout.InOut;
 import com.example.the_boxes_server.item.Item;
-import com.example.the_boxes_server.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,22 +17,20 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Inventory {
 
-    // 재고 ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer inventoryId;
 
-    // 해당 품목과의 연관관계
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
 
-    // 변동 후 재고 수량
+    @Column(name = "previous_quantity")
+    private Integer previousQuantity;
+
     @Column(name = "current_quantity")
     private Integer currentQuantity;
 
-
-    // 재고 변경 일시
     @Column(name = "created_at", updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
@@ -41,23 +39,34 @@ public class Inventory {
         createdAt = LocalDateTime.now();
     }
 
-    // 재고 업데이트 메서드 (현재 재고량 변경)
-    /**
-     * 입고 및 출고 수량을 업데이트 -> 재고 조정
-     * @param inQuantity  입고 수량
-     * @param outQuantity 출고 수량
-     */
-    public void updateInventory(Integer inQuantity, Integer outQuantity) {
-        // 입고 및 출고 수량이 null인 경우 0으로 설정
-        int incoming = (inQuantity != null) ? inQuantity : 0;
-        int outgoing = (outQuantity != null) ? outQuantity : 0;
+    // 재고를 업데이트하는 메서드
+    public void update(InOut.OrderType orderType, Integer quantity) {
+        // 수량이 null이거나 음수인 경우 예외 발생
+        if (quantity == null || quantity < 0) {
+            throw new IllegalArgumentException("수량은 0 이상의 정수여야 합니다.");
+        }
 
-        // 이전 재고량을 현재 재고량으로 설정
+        // 업데이트 전 현재 재고량 저장
         Integer previousQuantity = this.currentQuantity;
 
-        // 현재 재고량 계산
-        this.currentQuantity = previousQuantity + incoming - outgoing;
+        // 주문 타입에 따라 새로운 재고량 계산
+        Integer newQuantity;
+        switch (orderType) {
+            case INCOMING:
+                newQuantity = previousQuantity + quantity;
+                break;
+            case OUTGOING:
+                newQuantity = previousQuantity - quantity;
+                // 재고가 부족할 경우 예외 발생
+                if (newQuantity < 0) {
+                    throw new IllegalStateException("출고 수량이 재고 수량을 초과할 수 없습니다.");
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("유효하지 않은 주문 타입입니다.");
+        }
 
-        // 필요한 경우 입고 및 출고 수량 설정 (추가 필드 필요)
+        // 현재 재고량 업데이트
+        this.currentQuantity = newQuantity;
     }
 }

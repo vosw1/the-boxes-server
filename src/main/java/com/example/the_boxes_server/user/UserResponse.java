@@ -14,12 +14,12 @@ public class UserResponse {
         private String phone; // 전화번호
 
 
-        public LoginDTO(User user) {
-            this.id = user.getUserId();
-            this.name = user.getName();
-            this.position = user.getPosition();
-            this.status = user.getStatus();
-            this.phone = user.getPhone();
+        public LoginDTO(User sessionUser) {
+            this.id = sessionUser.getUserId();
+            this.name = sessionUser.getName();
+            this.position = sessionUser.getPosition();
+            this.status = sessionUser.getStatus();
+            this.phone = sessionUser.getPhone();
 
         }
     }

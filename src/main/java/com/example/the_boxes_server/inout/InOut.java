@@ -20,7 +20,7 @@ public class InOut {
     // 입출고 지시 ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer inOutId;
 
     // 지시 유형 (입고, 출고)
     @Enumerated(EnumType.STRING)
