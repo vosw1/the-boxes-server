@@ -2,6 +2,7 @@ package com.example.the_boxes_server.inventory;
 
 import com.example.the_boxes_server.item.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -33,4 +34,8 @@ public interface InventoryRepository extends JpaRepository<Inventory, Integer> {
      */
     @Query("SELECT i FROM Inventory i JOIN i.item it WHERE it.status = :status")
     List<Inventory> findByStatus(@Param("status") Item.ItemStatus status);
+
+    @Modifying
+    @Query("UPDATE Inventory i SET i.currentQuantity = i.currentQuantity + ?2 WHERE i.item.itemId = ?1")
+    void updateStock(Integer itemId, Integer quantity);
 }

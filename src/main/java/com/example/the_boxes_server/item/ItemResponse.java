@@ -1,6 +1,5 @@
 package com.example.the_boxes_server.item;
 
-import com.example.the_boxes_server.user.User;
 import com.example.the_boxes_server.user.UserResponse;
 import lombok.Data;
 import java.time.LocalDateTime;

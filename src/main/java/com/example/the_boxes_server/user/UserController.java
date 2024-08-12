@@ -1,6 +1,7 @@
 package com.example.the_boxes_server.user;
 
 import com.example.the_boxes_server.core.util.ApiUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,9 +27,17 @@ public class UserController {
 
     // 회원 로그인
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody UserRequest.LoginDTO reqDTO, Errors errors) {
+    public ResponseEntity<?> login(@Valid @RequestBody UserRequest.LoginDTO reqDTO, Errors errors, HttpServletRequest request) {
+        // 사용자 인증 및 JWT 생성
         String jwt = userService.login(reqDTO);
         UserResponse.LoginDTO respDTO = userService.loginByDTO(reqDTO);
+
+        // 세션 생성 및 사용자 정보 저장
+        HttpSession session = request.getSession(true); // true: 세션이 없으면 새로 생성
+        session.setAttribute("sessionUser", respDTO);
+        System.out.println("sessionUser: " + session.getAttribute("sessionUser"));
+
+        // 응답 반환
         return ResponseEntity.ok().header("Authorization", "Bearer " + jwt).body(new ApiUtil<>(respDTO));
     }
 

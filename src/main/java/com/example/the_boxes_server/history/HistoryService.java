@@ -1,6 +1,7 @@
 package com.example.the_boxes_server.history;
 
 import com.example.the_boxes_server.inout.InOut;
+import com.example.the_boxes_server.inventory.Inventory;
 import com.example.the_boxes_server.item.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
