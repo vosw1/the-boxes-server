@@ -10,6 +10,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.the_boxes_server.history.History;
+import com.example.the_boxes_server.history.HistoryRepository;
+
+import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
 @Service
 public class InOutService {
@@ -17,6 +22,7 @@ public class InOutService {
     private final InventoryRepository inventoryRepository;
     private final InOutRepository inOutRepository;
     private final ItemRepository itemRepository;
+    private final HistoryRepository historyRepository;
 
     @Transactional
     public InOutResponse.SaveDTO save(int itemId, InOutRequest.SaveDTO reqDTO, User sessionUser) {
@@ -32,10 +38,30 @@ public class InOutService {
         Integer inComing = reqDTO.getInComing();
         Integer outGoing = reqDTO.getOutComing();
 
-        inventory.update(inComing, outGoing);
+        // 현재 재고 수량 저장
+        Integer previousQuantity = inventory.getCurrentQuantity();
 
+        // Inventory 업데이트
+        inventory.update(inComing, outGoing);
         inventoryRepository.save(inventory);
+
+        // InOut 저장
         InOut savedInOut = inOutRepository.save(inOut);
+
+        // History 저장
+        History history = History.builder()
+                .item(item)
+                .inOut(savedInOut)
+                .inventory(inventory) // Inventory 정보를 담습니다.
+                .previousQuantity(previousQuantity) // 이전 수량을 저장합니다.
+                .currentQuantity(inventory.getCurrentQuantity()) // 현재 수량을 저장합니다.
+                .build();
+
+        // 로그 추가
+        System.out.println("Saving history: " + history);
+
+        // History 저장
+        historyRepository.save(history);
 
         return new InOutResponse.SaveDTO(savedInOut);
     }

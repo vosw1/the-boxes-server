@@ -23,12 +23,12 @@ public class InOut {
     private Integer inOutId;
 
     // 입고수
-    @Column(name = "in_coming", nullable = false)
-    private Integer inComing;
+    @Column(name = "in_coming")
+    private int inComing;
 
     // 출고수
-    @Column(name = "out_coming", nullable = false)
-    private Integer outComing;
+    @Column(name = "out_coming")
+    private int outComing;
 
     // 예외 발생시 사유
     @Column(name = "other")

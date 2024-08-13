@@ -52,6 +52,7 @@ public class UserService {
         return jwt;
     }
 
+    @Transactional
     public UserResponse.LoginDTO loginByDTO(UserRequest.LoginDTO reqDTO) {
         User user = userRepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
                 .orElseThrow(() -> new Exception401("인증되지 않았습니다"));
@@ -59,7 +60,13 @@ public class UserService {
         return new UserResponse.LoginDTO(user);
     }
 
+    @Transactional
+    public User getUserById(int userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
 
+    @Transactional
     public UserResponse.JoinDTO joinByDTO(UserRequest.JoinDTO reqDTO) {
         User user = userRepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
                 .orElseThrow(() -> new Exception401("인증되지 않았습니다"));

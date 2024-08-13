@@ -50,7 +50,8 @@ public class InOutResponse {
             this.inComing = inOut.getInComing();
             this.outComing = inOut.getOutComing();
             this.createdAt = inOut.getCreatedAt();
-            this.itemId = inOut.getItem() != null ? inOut.getItem().getItemId() : null; // Assuming Item has getItemId method
+            this.user = inOut.getUser();
+            this.itemId = inOut.getItem() != null ? inOut.getItem().getItemId() : null;
         }
     }
 }

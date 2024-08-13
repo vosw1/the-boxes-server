@@ -32,6 +32,7 @@ public class InOutRequest {
             this.inComing = inOut.getInComing();
             this.outComing = inOut.getOutComing();
             this.createdAt = inOut.getCreatedAt();
+            this.user = inOut.getUser();
             this.itemId = inOut.getItem() != null ? inOut.getItem().getItemId() : null; // Assuming Item has getItemId method
         }
 

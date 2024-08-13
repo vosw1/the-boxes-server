@@ -27,4 +27,18 @@ public class InOutController {
         InOutResponse.SaveDTO resDTO = inOutService.save(itemId, reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(resDTO));
     }
+
+    @GetMapping()
+    public ResponseEntity<?> getSessionInfo() {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
+        }
+
+        System.out.println("Session User Info:");
+        System.out.println("User ID: " + sessionUser.getUserId());
+        System.out.println("User Name: " + sessionUser.getName());  // 사용자 이름 출력
+
+        return ResponseEntity.ok(sessionUser);
+    }
 }

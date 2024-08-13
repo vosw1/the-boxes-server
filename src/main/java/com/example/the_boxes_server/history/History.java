@@ -35,6 +35,12 @@ public class History {
     @JoinColumn(name = "inventory_id")
     private Inventory inventory;
 
+    @Column(name = "previous_quantity")
+    private Integer previousQuantity;
+
+    @Column(name = "current_quantity")
+    private Integer currentQuantity;
+
     @Column(name = "created_at", updatable = false, nullable = false)
     private LocalDateTime createdAt;
 

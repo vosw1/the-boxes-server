@@ -1,6 +1,8 @@
 package com.example.the_boxes_server.item;
 
 import com.example.the_boxes_server.core.exceotions.Exception404;
+import com.example.the_boxes_server.inventory.Inventory;
+import com.example.the_boxes_server.inventory.InventoryRepository;
 import com.example.the_boxes_server.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -14,6 +16,7 @@ import java.util.stream.Collectors;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final InventoryRepository inventoryRepository;
 
     // 전체 및 조건별 조회
     @Transactional
@@ -34,15 +37,28 @@ public class ItemService {
 
     @Transactional
     public ItemResponse.SaveDTO save(ItemRequest.SaveDTO reqDTO, User sessionUser) {
+        // DTO를 엔티티로 변환
         Item item = reqDTO.toEntity(sessionUser);
 
         // 디버깅 로그 추가
         System.out.println("DTO to Entity conversion: " + item);
 
+        // 새로운 Item 저장
         item = itemRepository.save(item);
+
+        // 저장된 Item과 관련된 Inventory 생성 및 초기화
+        Inventory inventory = Inventory.builder()
+                .item(item)
+                .previousQuantity(0) // 이전 수량을 0으로 설정
+                .currentQuantity(0)  // 현재 수량을 0으로 설정
+                .build();
+
+        // Inventory 저장
+        inventoryRepository.save(inventory);
 
         // 저장된 엔티티 확인
         System.out.println("Saved item: " + item);
+        System.out.println("Initialized inventory: " + inventory);
 
         return new ItemResponse.SaveDTO(item);
     }

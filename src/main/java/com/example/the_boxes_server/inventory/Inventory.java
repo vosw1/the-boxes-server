@@ -40,24 +40,12 @@ public class Inventory {
     }
 
     // 재고를 업데이트하는 메서드
-    public void update(Integer inComing, Integer outGoing) {
-        // Validate quantities
-        if (inComing == null) {
-            inComing = 0;
-        }
-        if (outGoing == null) {
-            outGoing = 0;
-        }
+    public void update(int inComing, int outComing) {
 
         // Calculate new quantity
-        Integer newQuantity = this.currentQuantity + inComing - outGoing;
-
-        // Check for negative inventory
-        if (newQuantity < 0) {
-            throw new IllegalStateException("출고 수량이 재고 수량을 초과할 수 없습니다.");
-        }
+        Integer currentQuantity = this.currentQuantity + inComing - outComing;
 
         // Update current quantity
-        this.currentQuantity = newQuantity;
+        this.currentQuantity = currentQuantity;
     }
 }

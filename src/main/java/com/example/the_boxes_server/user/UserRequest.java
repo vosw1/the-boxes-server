@@ -24,8 +24,6 @@ public class UserRequest {
     @NoArgsConstructor
     public static class JoinDTO {
 
-        private String userimg; // 사용자 이미지 URL (선택적)
-
         @NotEmpty(message = "유저네임이 공백일 수 없습니다")
         private String username;
 
