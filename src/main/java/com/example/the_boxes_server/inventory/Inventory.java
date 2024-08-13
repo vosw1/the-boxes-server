@@ -39,13 +39,17 @@ public class Inventory {
         createdAt = LocalDateTime.now();
     }
 
-    // 재고를 업데이트하는 메서드
     public void update(int inComing, int outComing) {
+        // Save the current quantity before updating
+        Integer previousQuantity = this.currentQuantity;
 
         // Calculate new quantity
-        Integer currentQuantity = this.currentQuantity + inComing - outComing;
+        Integer newQuantity = previousQuantity + inComing - outComing;
 
         // Update current quantity
-        this.currentQuantity = currentQuantity;
+        this.currentQuantity = newQuantity;
+
+        // Update previous quantity
+        this.previousQuantity = previousQuantity;
     }
 }

@@ -9,11 +9,9 @@ import com.example.the_boxes_server.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.example.the_boxes_server.history.History;
 import com.example.the_boxes_server.history.HistoryRepository;
 
-import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Service
@@ -52,9 +50,9 @@ public class InOutService {
         History history = History.builder()
                 .item(item)
                 .inOut(savedInOut)
-                .inventory(inventory) // Inventory 정보를 담습니다.
-                .previousQuantity(previousQuantity) // 이전 수량을 저장합니다.
-                .currentQuantity(inventory.getCurrentQuantity()) // 현재 수량을 저장합니다.
+                .inventory(inventory)
+                .previousQuantity(previousQuantity) // 업데이트 전에 저장한 이전 수량
+                .currentQuantity(inventory.getCurrentQuantity()) // 업데이트 후 현재 수량
                 .build();
 
         // 로그 추가
