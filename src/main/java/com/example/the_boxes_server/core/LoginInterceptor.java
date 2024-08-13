@@ -7,42 +7,32 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.the_boxes_server.core.exceotions.Exception401;
 import com.example.the_boxes_server.core.exceotions.Exception500;
-import com.example.the_boxes_server.user.User;
-import com.example.the_boxes_server.user.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 public class LoginInterceptor implements HandlerInterceptor {
-
-    @Autowired
-    private UserRepository userRepository;
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // JWT 토큰 추출
+        // jwt 토근
         String jwt = request.getHeader("Authorization");
 
-        // JWT 토큰이 없을 경우 예외 처리
+        // interceptor 에서 안하면 throw 날리기가 힘들다!
+        // 토큰 전달 검사
         if (jwt == null) {
-            throw new Exception401("JWT 토큰을 전달해주세요");
+            throw new Exception401("jwt 토큰을 전달해주세요");
         }
 
-        // Bearer 접두사 제거
+        // Bearer jwt토큰 -> 띄워쓰기를 유의해서 보자! 프로토콜 이다!
         jwt = jwt.replace("Bearer ", "");
 
+        System.out.println("==========JWT");
+        System.out.println(jwt);
+        System.out.println("==========JWT");
+        // 검증
         try {
-            // JWT 검증
             DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512("theboxes")).build().verify(jwt);
-            int userId = decodedJWT.getClaim("id").asInt();
-
-            // 사용자 정보 설정
-            User user = userRepository.findById(userId)
-                    .orElseThrow(() -> new Exception401("존재하지 않는 사용자입니다"));
-
-            // 사용자 정보를 요청에 설정
-            request.setAttribute("user", user);
+            String role = decodedJWT.getClaim("role").asString();
 
             return true;
         } catch (TokenExpiredException e) {
@@ -50,8 +40,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         } catch (JWTDecodeException e) {
             throw new Exception401("토큰이 유효하지 않습니다");
         } catch (Exception e) {
-            e.printStackTrace(); // 개발 시 테스트 보기
-            throw new Exception500(e.getMessage()); // 알 수 없는 오류
+            e.printStackTrace(); // 개발 진행 시 TEST 보기
+            throw new Exception500(e.getMessage()); // 알 수 없는 오류 이니깐 500으로 다 던져 준다.
         }
     }
 }

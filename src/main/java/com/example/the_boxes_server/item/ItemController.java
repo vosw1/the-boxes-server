@@ -11,7 +11,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/items")
+@RequestMapping("/api/item")
 public class ItemController {
 
     private final HttpSession session;
