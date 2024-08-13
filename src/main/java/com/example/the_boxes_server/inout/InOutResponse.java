@@ -15,8 +15,8 @@ public class InOutResponse {
         private InOut.OrderStatus status;
         private Integer inComing;
         private Integer outComing;
-        private LocalDateTime createdAt;
         private UserResponse.LoginDTO user;
+        private LocalDateTime createdAt;
 
         public ListDTO(InOut inOut) {
             this.inOutId = inOut.getInOutId();
@@ -24,8 +24,8 @@ public class InOutResponse {
             this.status = inOut.getStatus();
             this.inComing = inOut.getInComing();
             this.outComing = inOut.getOutComing();
-            this.createdAt = inOut.getCreatedAt();
             this.user = inOut.getUser() != null ? new UserResponse.LoginDTO(inOut.getUser()) : null;
+            this.createdAt = inOut.getCreatedAt();
         }
     }
 
