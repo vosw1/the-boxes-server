@@ -8,18 +8,17 @@ import java.time.LocalDateTime;
 
 @Builder
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class InOutRequest {
 
     @Data
     public static class SaveDTO {
         private Integer inOutId;
-        private InOut.OrderType orderType;
         private InOut.ChangeType changeType;
         private String reason;
-        private Integer quantity;
         private InOut.OrderStatus status;
+        private Integer inComing;
+        private Integer outComing;
         private LocalDateTime createdAt;
         private User user;
         private Integer itemId;  // Changed from Item to itemId
@@ -30,10 +29,10 @@ public class InOutRequest {
         public SaveDTO(InOut inOut) {
             this.inOutId = inOut.getInOutId();
             this.changeType = inOut.getChangeType();
-            this.orderType = inOut.getOrderType();
-            this.status = inOut.getStatus();
             this.reason = inOut.getReason();
-            this.quantity = inOut.getQuantity();
+            this.status = inOut.getStatus();
+            this.inComing = inOut.getInComing();
+            this.outComing = inOut.getOutComing();
             this.createdAt = inOut.getCreatedAt();
             this.itemId = inOut.getItem() != null ? inOut.getItem().getItemId() : null; // Assuming Item has getItemId method
         }
@@ -41,8 +40,8 @@ public class InOutRequest {
         public InOut toEntity(User sessionUser, Item item) {
             return InOut.builder()
                     .inOutId(this.inOutId)
-                    .orderType(this.orderType)
-                    .quantity(this.quantity)
+                    .inComing(this.inComing)
+                    .outComing(this.outComing)
                     .changeType(this.changeType)
                     .reason(this.reason)
                     .status(this.status)

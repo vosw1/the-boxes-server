@@ -7,8 +7,6 @@ import com.example.the_boxes_server.item.Item;
 import com.example.the_boxes_server.item.ItemRepository;
 import com.example.the_boxes_server.user.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,12 +27,14 @@ public class InOutService {
                 .orElseThrow(() -> new Exception404("재고 기록을 찾을 수 없습니다"));
 
         InOut inOut = reqDTO.toEntity(sessionUser, item);
-
         inOut.setItem(item);
 
-        inventory.update(reqDTO.getOrderType(), reqDTO.getQuantity());
-        inventoryRepository.save(inventory);
+        Integer inComing = reqDTO.getInComing();
+        Integer outGoing = reqDTO.getOutComing();
 
+        inventory.update(inComing, outGoing);
+
+        inventoryRepository.save(inventory);
         InOut savedInOut = inOutRepository.save(inOut);
 
         return new InOutResponse.SaveDTO(savedInOut);

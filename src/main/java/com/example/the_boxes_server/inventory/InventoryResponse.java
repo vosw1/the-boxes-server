@@ -12,11 +12,13 @@ public class InventoryResponse {
         private Integer inventoryId;
         private ItemResponse.ListDTO item;
         private Integer currentQuantity;
+        private Integer previousQuantity;
         private LocalDateTime createdAt;
 
         public ListDTO(Inventory inventory) {
             this.inventoryId = inventory.getInventoryId();
             this.item = new ItemResponse.ListDTO(inventory.getItem());
+            this.previousQuantity = inventory.getPreviousQuantity();
             this.currentQuantity = inventory.getCurrentQuantity();
             this.createdAt = inventory.getCreatedAt();
         }

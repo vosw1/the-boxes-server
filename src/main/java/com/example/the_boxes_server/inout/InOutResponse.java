@@ -1,5 +1,6 @@
 package com.example.the_boxes_server.inout;
 
+import com.example.the_boxes_server.user.User;
 import com.example.the_boxes_server.user.UserResponse;
 import lombok.Data;
 
@@ -10,46 +11,50 @@ public class InOutResponse {
     @Data
     public static class ListDTO {
         private Integer inOutId;
-        private InOut.OrderType orderType;
-        private String changeType;  // Changed to String to store the name of the enum
+        private InOut.ChangeType changeType;
         private String reason;
-        private String status;  // Changed to String to store the name of the enum
-        private Integer quantity;
+        private InOut.OrderStatus status;
+        private Integer inComing;
+        private Integer outComing;
         private LocalDateTime createdAt;
-        private UserResponse.LoginDTO  user;
+        private UserResponse.LoginDTO user;
 
         public ListDTO(InOut inOut) {
             this.inOutId = inOut.getInOutId();
-            this.orderType = inOut.getOrderType();
-            this.changeType = inOut.getChangeType().name(); // Convert enum to String
+            this.changeType = inOut.getChangeType();
             this.reason = inOut.getReason();
-            this.status = inOut.getStatus().name(); // Convert enum to String
-            this.quantity = inOut.getQuantity();
+            this.status = inOut.getStatus();
+            this.inComing = inOut.getInComing();
+            this.outComing = inOut.getOutComing();
             this.createdAt = inOut.getCreatedAt();
-            this.user = new UserResponse.LoginDTO (inOut.getUser());
+            this.user = inOut.getUser() != null ? new UserResponse.LoginDTO(inOut.getUser()) : null;
         }
     }
 
     @Data
     public static class SaveDTO {
         private Integer inOutId;
-        private InOut.OrderType orderType;
-        private String changeType;  // Changed to String to store the name of the enum
+        private InOut.ChangeType changeType;
         private String reason;
-        private String status;  // Changed to String to store the name of the enum
-        private Integer quantity;
+        private InOut.OrderStatus status;
+        private Integer inComing;
+        private Integer outComing;
         private LocalDateTime createdAt;
-        private UserResponse.LoginDTO  user;
+        private User user;
+        private Integer itemId;  // Changed from Item to itemId
+
+        public SaveDTO() {
+        }
 
         public SaveDTO(InOut inOut) {
             this.inOutId = inOut.getInOutId();
-            this.orderType = inOut.getOrderType();
-            this.changeType = inOut.getChangeType().name(); // Convert enum to String
+            this.changeType = inOut.getChangeType();
             this.reason = inOut.getReason();
-            this.status = inOut.getStatus().name(); // Convert enum to String
-            this.quantity = inOut.getQuantity();
+            this.status = inOut.getStatus();
+            this.inComing = inOut.getInComing();
+            this.outComing = inOut.getOutComing();
             this.createdAt = inOut.getCreatedAt();
-            this.user = new UserResponse.LoginDTO (inOut.getUser());
+            this.itemId = inOut.getItem() != null ? inOut.getItem().getItemId() : null; // Assuming Item has getItemId method
         }
     }
 }

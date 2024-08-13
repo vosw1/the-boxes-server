@@ -40,33 +40,24 @@ public class Inventory {
     }
 
     // 재고를 업데이트하는 메서드
-    public void update(InOut.OrderType orderType, Integer quantity) {
-        // 수량이 null이거나 음수인 경우 예외 발생
-        if (quantity == null || quantity < 0) {
-            throw new IllegalArgumentException("수량은 0 이상의 정수여야 합니다.");
+    public void update(Integer inComing, Integer outGoing) {
+        // Validate quantities
+        if (inComing == null) {
+            inComing = 0;
+        }
+        if (outGoing == null) {
+            outGoing = 0;
         }
 
-        // 업데이트 전 현재 재고량 저장
-        Integer previousQuantity = this.currentQuantity;
+        // Calculate new quantity
+        Integer newQuantity = this.currentQuantity + inComing - outGoing;
 
-        // 주문 타입에 따라 새로운 재고량 계산
-        Integer newQuantity;
-        switch (orderType) {
-            case INCOMING:
-                newQuantity = previousQuantity + quantity;
-                break;
-            case OUTGOING:
-                newQuantity = previousQuantity - quantity;
-                // 재고가 부족할 경우 예외 발생
-                if (newQuantity < 0) {
-                    throw new IllegalStateException("출고 수량이 재고 수량을 초과할 수 없습니다.");
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("유효하지 않은 주문 타입입니다.");
+        // Check for negative inventory
+        if (newQuantity < 0) {
+            throw new IllegalStateException("출고 수량이 재고 수량을 초과할 수 없습니다.");
         }
 
-        // 현재 재고량 업데이트
+        // Update current quantity
         this.currentQuantity = newQuantity;
     }
 }
