@@ -2,7 +2,6 @@ package com.example.the_boxes_server.inout;
 
 import com.example.the_boxes_server.core.util.ApiUtil;
 import com.example.the_boxes_server.user.User;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
