@@ -22,7 +22,7 @@ public interface HistoryRepository extends JpaRepository<History, Integer> {
 
     /**
      * @param startDate 시작 날짜
-     * @param endDate 종료 날짜
+     * @param endDate   종료 날짜
      * @return 해당 날짜 범위의 변동 내역 리스트
      */
     @Query("SELECT h FROM History h WHERE h.createdAt BETWEEN :startDate AND :endDate")
@@ -37,24 +37,4 @@ public interface HistoryRepository extends JpaRepository<History, Integer> {
      */
     @Query("SELECT h FROM History h JOIN h.item it WHERE it.status = :status")
     List<History> findByStatus(@Param("status") Item.ItemStatus status);
-
-    /**
-     * @param changeType 변동 사유
-     * @return 해당 사유를 포함하는 변동 내역 리스트
-     */
-    @Query("SELECT h FROM History h JOIN h.inOut io WHERE io.changeType = :changeType")
-    List<History> findByChangeType(@Param("changeType") InOut.ChangeType changeType);
-
-    /**
-     * @param startDate 시작 날짜
-     * @param endDate 종료 날짜
-     * @param changeType 변동 사유
-     * @return 해당 날짜 범위와 사유를 포함하는 변동 내역 리스트
-     */
-    @Query("SELECT h FROM History h JOIN h.inOut io WHERE h.createdAt BETWEEN :startDate AND :endDate AND io.changeType = :changeType")
-    List<History> findByDateRangeAndChangeType(
-            @Param("startDate") LocalDateTime startDate,
-            @Param("endDate") LocalDateTime endDate,
-            @Param("changeType") InOut.ChangeType changeType
-    );
 }

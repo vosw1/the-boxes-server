@@ -22,8 +22,7 @@ public class HistoryService {
     public List<HistoryResponse.ListDTO> list(Optional<LocalDate> date,
                                               Optional<LocalDate> startDate,
                                               Optional<LocalDate> endDate,
-                                              Optional<Item.ItemStatus> status,
-                                              Optional<InOut.ChangeType> changeType) {
+                                              Optional<Item.ItemStatus> status) {
         List<History> histories;
 
         if (date.isPresent()) {
@@ -34,8 +33,6 @@ public class HistoryService {
             histories = historyRepository.findByDateRange(startDate.get().atStartOfDay(), endDate.get().atTime(23, 59, 59));
         } else if (status.isPresent()) {
             histories = historyRepository.findByStatus(status.get());
-        } else if (changeType.isPresent()) {
-            histories = historyRepository.findByChangeType(changeType.get());
         } else {
             histories = historyRepository.findAll();
         }

@@ -14,8 +14,7 @@ public class InOutRequest {
     @Data
     public static class SaveDTO {
         private Integer inOutId;
-        private InOut.ChangeType changeType;
-        private String reason;
+        private String other;
         private InOut.OrderStatus status;
         private Integer inComing;
         private Integer outComing;
@@ -28,8 +27,7 @@ public class InOutRequest {
 
         public SaveDTO(InOut inOut) {
             this.inOutId = inOut.getInOutId();
-            this.changeType = inOut.getChangeType();
-            this.reason = inOut.getReason();
+            this.other = inOut.getOther();
             this.status = inOut.getStatus();
             this.inComing = inOut.getInComing();
             this.outComing = inOut.getOutComing();
@@ -42,8 +40,7 @@ public class InOutRequest {
                     .inOutId(this.inOutId)
                     .inComing(this.inComing)
                     .outComing(this.outComing)
-                    .changeType(this.changeType)
-                    .reason(this.reason)
+                    .other(this.getOther())
                     .status(this.status)
                     .createdAt(this.createdAt)
                     .item(item)

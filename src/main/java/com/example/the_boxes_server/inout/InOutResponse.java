@@ -11,8 +11,7 @@ public class InOutResponse {
     @Data
     public static class ListDTO {
         private Integer inOutId;
-        private InOut.ChangeType changeType;
-        private String reason;
+        private String other;
         private InOut.OrderStatus status;
         private Integer inComing;
         private Integer outComing;
@@ -21,8 +20,7 @@ public class InOutResponse {
 
         public ListDTO(InOut inOut) {
             this.inOutId = inOut.getInOutId();
-            this.changeType = inOut.getChangeType();
-            this.reason = inOut.getReason();
+            this.other = inOut.getOther();
             this.status = inOut.getStatus();
             this.inComing = inOut.getInComing();
             this.outComing = inOut.getOutComing();
@@ -34,8 +32,7 @@ public class InOutResponse {
     @Data
     public static class SaveDTO {
         private Integer inOutId;
-        private InOut.ChangeType changeType;
-        private String reason;
+        private String other;
         private InOut.OrderStatus status;
         private Integer inComing;
         private Integer outComing;
@@ -48,8 +45,7 @@ public class InOutResponse {
 
         public SaveDTO(InOut inOut) {
             this.inOutId = inOut.getInOutId();
-            this.changeType = inOut.getChangeType();
-            this.reason = inOut.getReason();
+            this.other = inOut.getOther();
             this.status = inOut.getStatus();
             this.inComing = inOut.getInComing();
             this.outComing = inOut.getOutComing();

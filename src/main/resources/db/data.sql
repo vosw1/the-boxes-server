@@ -39,20 +39,19 @@ INSERT INTO inventory (
 
 
 -- 입출고 테이블에 데이터 삽입
--- 입출고 테이블에 데이터 삽입
 INSERT INTO in_out (
-    item_id, in_coming, out_coming, change_type, reason, user_id, status, created_at
+    item_id, in_coming, out_coming, other, user_id, status, created_at
 ) VALUES
-      (1, 10, 0, 'STOCK_ADDITION', NULL, 1, 'PENDING', '2024-08-11 09:00:00'),
-      (2, 0, 5, 'DAMAGE', NULL, 2, 'APPROVED', '2024-08-11 10:00:00'),
-      (3, 0, 5, 'STOCK_REMOVAL', NULL, 1, 'SHIPPED', '2024-08-11 11:00:00'),
-      (4, 0, 5, 'OTHER', '제품 교환', 2, 'DELIVERED', '2024-08-11 12:00:00'),
-      (5, 10, 0, 'STOCK_ADDITION', NULL, 1, 'PENDING', '2024-08-11 13:00:00'),
-      (6, 0, 5, 'STOCK_REMOVAL', NULL, 2, 'APPROVED', '2024-08-11 14:00:00'),
-      (7, 0, 1, 'DAMAGE', NULL, 1, 'SHIPPED', '2024-08-11 15:00:00'),
-      (8, 2, 0, 'STOCK_ADDITION', NULL, 2, 'DELIVERED', '2024-08-11 16:00:00'),
-      (9, 0, 1, 'STOCK_REMOVAL', NULL, 1, 'PENDING', '2024-08-11 17:00:00'),
-      (10, 0, 1, 'OTHER', '제품 교환', 2, 'APPROVED', '2024-08-11 18:00:00');
+      (1, 10, 0, NULL, 1, 'PENDING', '2024-08-11 09:00:00'),
+      (2, 0, 5, NULL, 2, 'APPROVED', '2024-08-11 10:00:00'),
+      (3, 0, 5, NULL, 1, 'SHIPPED', '2024-08-11 11:00:00'),
+      (4, 0, 5, '제품 교환', 2, 'DELIVERED', '2024-08-11 12:00:00'),
+      (5, 10, 0, NULL, 1, 'PENDING', '2024-08-11 13:00:00'),
+      (6, 0, 5, NULL, 2, 'APPROVED', '2024-08-11 14:00:00'),
+      (7, 0, 1, NULL, 1, 'SHIPPED', '2024-08-11 15:00:00'),
+      (8, 2, 0, NULL, 2, 'DELIVERED', '2024-08-11 16:00:00'),
+      (9, 0, 1, NULL, 1, 'PENDING', '2024-08-11 17:00:00'),
+      (10, 0, 1, '제품 교환', 2, 'APPROVED', '2024-08-11 18:00:00');
 
 
 -- 히스토리 테이블에 데이터 삽입

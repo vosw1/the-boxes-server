@@ -30,14 +30,9 @@ public class InOut {
     @Column(name = "out_coming", nullable = false)
     private int outComing;
 
-    // 지시 변동 유형
-    @Enumerated(EnumType.STRING)
-    @Column(name = "change_type")
-    private ChangeType changeType;
-
-    // 변동 유형이 OTHER일 때 사용하는 사유
-    @Column(name = "reason")
-    private String reason;
+    // 예외 발생시 사유
+    @Column(name = "other")
+    private String other;
 
     // 연관된 품목
     @ManyToOne
@@ -60,13 +55,6 @@ public class InOut {
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now(); // 생성 시 현재 시간 설정
-    }
-
-    public enum ChangeType {
-        STOCK_ADDITION, // 재고 추가
-        STOCK_REMOVAL,  // 재고 출고/판매
-        DAMAGE,         // 재고 손상
-        OTHER           // 기타
     }
 
     public enum OrderStatus {

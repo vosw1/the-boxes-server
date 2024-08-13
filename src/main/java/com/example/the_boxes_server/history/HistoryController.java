@@ -28,10 +28,9 @@ public class HistoryController {
             @RequestParam Optional<LocalDate> date,
             @RequestParam Optional<LocalDate> startDate,
             @RequestParam Optional<LocalDate> endDate,
-            @RequestParam Optional<Item.ItemStatus> status,
-            @RequestParam Optional<InOut.ChangeType> changeType) {
+            @RequestParam Optional<Item.ItemStatus> status) {
 
-        List<HistoryResponse.ListDTO> historyList = historyService.list(date, startDate, endDate, status, changeType);
+        List<HistoryResponse.ListDTO> historyList = historyService.list(date, startDate, endDate, status);
 
         return ResponseEntity.ok(new ApiUtil<>(historyList));
     }
