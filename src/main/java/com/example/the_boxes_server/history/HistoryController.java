@@ -33,8 +33,7 @@ public class HistoryController {
             @RequestParam Optional<Item.ItemStatus> status) {
 
         List<HistoryResponse.ListDTO> historyList = historyService.list(date, startDate, endDate, status);
-
-        return ok(new ApiUtil<>(historyList));
+        return ResponseEntity.ok(new ApiUtil<>(historyList));
     }
 
     // 엑셀로 저장
@@ -54,7 +53,7 @@ public class HistoryController {
             headers.add(HttpHeaders.CONTENT_TYPE, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
             return new ResponseEntity<>(excelFile, headers, HttpStatus.OK);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
