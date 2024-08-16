@@ -14,8 +14,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.http.ResponseEntity.ok;
-
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/history")
@@ -33,30 +31,21 @@ public class HistoryController {
             @RequestParam Optional<Item.ItemStatus> status) {
 
         List<HistoryResponse.ListDTO> historyList = historyService.list(date, startDate, endDate, status);
-        return ResponseEntity.ok(new ApiUtil<>(historyList));
+        return ResponseEntity.ok(historyList); // 조회된 데이터를 반환
     }
 
     // 엑셀로 저장
     @PostMapping("/toExcel")
-    public ResponseEntity<byte[]> toExcel(
-            @RequestParam Optional<LocalDate> date,
-            @RequestParam Optional<LocalDate> startDate,
-            @RequestParam Optional<LocalDate> endDate,
-            @RequestParam Optional<Item.ItemStatus> status) {
-
+    public ResponseEntity<byte[]> toExcel(@RequestBody List<HistoryResponse.ListDTO> historyList) {
         try {
-            List<HistoryResponse.ListDTO> historyList = historyService.list(date, startDate, endDate, status);
             byte[] excelFile = excelService.exportDataToExcel(historyList);
-
             HttpHeaders headers = new HttpHeaders();
             headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=history.xlsx");
             headers.add(HttpHeaders.CONTENT_TYPE, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-
             return new ResponseEntity<>(excelFile, headers, HttpStatus.OK);
         } catch (IOException e) {
-            e.printStackTrace();
+            // 사용중인 로깅 프레임워크로 오류를 로깅합니다.
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 }

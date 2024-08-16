@@ -2,9 +2,9 @@ package com.example.the_boxes_server.history;
 
 import com.example.the_boxes_server.inout.InOutResponse;
 import com.example.the_boxes_server.inventory.InventoryResponse;
+import com.example.the_boxes_server.item.Item;
 import com.example.the_boxes_server.item.ItemResponse;
 import lombok.Data;
-
 import java.time.LocalDateTime;
 
 public class HistoryRequest {
@@ -24,5 +24,12 @@ public class HistoryRequest {
             this.inventory = new InventoryResponse.ListDTO(history.getInventory());
             this.createdAt = history.getCreatedAt();
         }
+    }
+
+    @Data
+    public static class FilterDTO {
+        private LocalDateTime startDate;
+        private LocalDateTime endDate;
+        private Item.ItemStatus status;
     }
 }
