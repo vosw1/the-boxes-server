@@ -19,6 +19,7 @@ public class InOutRequest {
         private Integer inComing;
         private Integer outComing;
         private Integer price;
+        private Integer amount;
         private LocalDateTime createdAt;
         private User user;
         private Integer itemId;  // Changed from Item to itemId
@@ -32,6 +33,7 @@ public class InOutRequest {
             this.status = inOut.getStatus();
             this.inComing = inOut.getInComing();
             this.price = inOut.getPrice();
+            this.amount = inOut.getAmount();
             this.outComing = inOut.getOutComing();
             this.createdAt = inOut.getCreatedAt();
             this.user = inOut.getUser();
@@ -39,11 +41,15 @@ public class InOutRequest {
         }
 
         public InOut toEntity(User sessionUser, Item item) {
+
+            int calculatedAmount = (this.price != null ? this.price : 0) * (this.inComing != null ? this.inComing : 0);
+
             return InOut.builder()
                     .inOutId(this.inOutId)
                     .inComing(this.inComing)
                     .outComing(this.outComing)
                     .price(this.price)
+                    .amount(calculatedAmount)
                     .other(this.getOther())
                     .status(this.status)
                     .createdAt(this.createdAt)

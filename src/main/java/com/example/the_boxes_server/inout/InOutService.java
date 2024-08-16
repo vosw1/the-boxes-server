@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.the_boxes_server.history.History;
 import com.example.the_boxes_server.history.HistoryRepository;
 
+import java.math.BigDecimal;
 
 @RequiredArgsConstructor
 @Service
@@ -21,6 +22,10 @@ public class InOutService {
     private final InOutRepository inOutRepository;
     private final ItemRepository itemRepository;
     private final HistoryRepository historyRepository;
+
+    public BigDecimal getWeightedAveragePrice() {
+        return inOutRepository.findWeightedAveragePrice();
+    }
 
     @Transactional
     public InOutResponse.SaveDTO save(int itemId, InOutRequest.SaveDTO reqDTO, User sessionUser) {
@@ -46,6 +51,9 @@ public class InOutService {
         // InOut 저장
         InOut savedInOut = inOutRepository.save(inOut);
 
+        // 가중 평균 단가 업데이트
+        updateWeightedAveragePrice();
+
         // History 저장
         History history = History.builder()
                 .item(item)
@@ -62,5 +70,11 @@ public class InOutService {
         historyRepository.save(history);
 
         return new InOutResponse.SaveDTO(savedInOut);
+    }
+
+    private void updateWeightedAveragePrice() {
+        BigDecimal weightedAveragePrice = getWeightedAveragePrice();
+        // 가중 평균 단가를 사용하는 로직 추가 (예: 캐시 업데이트, 로그 기록 등)
+        System.out.println("Updated weighted average price: " + weightedAveragePrice);
     }
 }

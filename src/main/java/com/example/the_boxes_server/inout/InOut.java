@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -29,6 +31,10 @@ public class InOut {
     // 입고 단가
     @Column(name = "price")
     private int price;
+
+    // 가중평균 단가 계산
+    @Column(name = "amount")
+    private int amount;
 
     // 출고수
     @Column(name = "out_coming")

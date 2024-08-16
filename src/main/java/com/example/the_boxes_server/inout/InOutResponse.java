@@ -15,6 +15,7 @@ public class InOutResponse {
         private InOut.OrderStatus status;
         private Integer inComing;
         private Integer price;
+        private Integer amount;
         private Integer outComing;
         private UserResponse.LoginDTO user;
         private LocalDateTime createdAt;
@@ -25,6 +26,7 @@ public class InOutResponse {
             this.status = inOut.getStatus();
             this.inComing = inOut.getInComing();
             this.price = inOut.getPrice();
+            this.amount = inOut.getAmount();
             this.outComing = inOut.getOutComing();
             this.user = inOut.getUser() != null ? new UserResponse.LoginDTO(inOut.getUser()) : null;
             this.createdAt = inOut.getCreatedAt();
@@ -38,6 +40,7 @@ public class InOutResponse {
         private InOut.OrderStatus status;
         private Integer inComing;
         private Integer price;
+        private Integer amount;
         private Integer outComing;
         private LocalDateTime createdAt;
         private User user;
@@ -52,6 +55,7 @@ public class InOutResponse {
             this.status = inOut.getStatus();
             this.inComing = inOut.getInComing();
             this.price = inOut.getPrice();
+            this.amount = inOut.getAmount();
             this.outComing = inOut.getOutComing();
             this.createdAt = inOut.getCreatedAt();
             this.user = inOut.getUser();
