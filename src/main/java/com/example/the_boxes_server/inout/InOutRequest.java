@@ -18,6 +18,7 @@ public class InOutRequest {
         private InOut.OrderStatus status;
         private Integer inComing;
         private Integer outComing;
+        private Integer price;
         private LocalDateTime createdAt;
         private User user;
         private Integer itemId;  // Changed from Item to itemId
@@ -30,6 +31,7 @@ public class InOutRequest {
             this.other = inOut.getOther();
             this.status = inOut.getStatus();
             this.inComing = inOut.getInComing();
+            this.price = inOut.getPrice();
             this.outComing = inOut.getOutComing();
             this.createdAt = inOut.getCreatedAt();
             this.user = inOut.getUser();
@@ -41,6 +43,7 @@ public class InOutRequest {
                     .inOutId(this.inOutId)
                     .inComing(this.inComing)
                     .outComing(this.outComing)
+                    .price(this.price)
                     .other(this.getOther())
                     .status(this.status)
                     .createdAt(this.createdAt)

@@ -26,6 +26,10 @@ public class InOut {
     @Column(name = "in_coming")
     private int inComing;
 
+    // 입고 단가
+    @Column(name = "price")
+    private int price;
+
     // 출고수
     @Column(name = "out_coming")
     private int outComing;
