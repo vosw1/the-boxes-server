@@ -37,6 +37,12 @@ Java를 이용해서 만드는 간단 재고  Server
 
 ---
 
+# API 문서
+
+[ API 문서 보기👆 ](https://sunset-knuckle-4bc.notion.site/API-11b1c3a25c8b80ffb1caea9654599e1b?pvs=4)
+
+---
+
 #  Features implemented by me
 | 테이블 설계 | 기능 | 테스트 |
 |:--:|:---------------:|:---------------:|
