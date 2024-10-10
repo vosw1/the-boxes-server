@@ -15,6 +15,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    @Transactional
     // 로그인 기능
     public String login(UserRequest.LoginDTO reqDTO) {
         User user = userRepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
@@ -26,17 +27,10 @@ public class UserService {
         return jwt;
     }
 
-
-    public Optional<User> findByUsername(String username){
-        Optional<User> userOP = userRepository.findByUsername(username);
-
-        if (userOP.isPresent()) {
-            throw new Exception400("중복된 유저네임입니다");
-        }
-
-        return userOP;
+    @Transactional
+    public boolean isUsernameDuplicate(String username) {
+        return userRepository.findByUsername(username).isPresent();
     }
-
 
     // 회원 가입
     @Transactional

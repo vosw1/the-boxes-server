@@ -1,6 +1,8 @@
 package com.example.the_boxes_server.user;
 
 import lombok.Data;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class UserResponse {
@@ -34,19 +36,25 @@ public class UserResponse {
     @Data
     public static class JoinDTO {
         private Integer usrId; // 유저 ID
-        private String email; // 이메일
         private String name; // 회원 이름
+        private LocalDate birthdate; // 생년월일
         private String phone; // 전화번호
-        private LocalDateTime createdAt; // 유저 가입 일자
+        private String address; // 주소
+        private String email; // 이메일
         private User.UserPosition position; // 직책 (Enum 사용)
+        private User.UserStatus status; // 상태 (Enum 사용)
+        private LocalDateTime createdAt; // 유저 가입 일자
 
         public JoinDTO(User user) {
             this.usrId = user.getUserId();
-            this.email = user.getEmail();
             this.name = user.getName();
+            this.birthdate = user.getBirthdate();
             this.phone = user.getPhone();
-            this.createdAt = user.getCreatedAt();
-            this.position = user.getPosition(); // 직책 추가
+            this.address = user.getAddress();
+            this.email = user.getEmail();
+            this.position = user.getPosition();
+            this.status = user.getStatus(); // User의 상태를 가져옵니다.
+            this.createdAt = user.getCreatedAt(); // 유저 가입 일자
         }
     }
 }

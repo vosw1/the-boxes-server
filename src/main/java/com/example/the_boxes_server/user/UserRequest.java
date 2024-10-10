@@ -3,7 +3,8 @@ package com.example.the_boxes_server.user;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 
 public class UserRequest {
 
@@ -44,7 +45,7 @@ public class UserRequest {
 
         @NotNull
         @Past(message = "생년월일은 과거여야 합니다.")
-        private LocalDateTime birthdate; // LocalDate 타입으로 수정
+        private LocalDate birthdate; // LocalDate 타입으로 수정
 
         @NotEmpty(message = "전화번호가 공백일 수 없습니다")
         @Pattern(regexp = "^\\d{3}-\\d{3,4}-\\d{4}$", message = "전화번호 형식이 올바르지 않습니다")
@@ -52,6 +53,10 @@ public class UserRequest {
 
         @NotEmpty(message = "직책이 공백일 수 없습니다")
         private String position; // 직책을 String으로 유지
+
+        // 추가된 필드
+        @NotEmpty(message = "상태가 공백일 수 없습니다")
+        private String status; // 상태를 String으로 유지
 
         public User toEntity() {
             return User.builder()
@@ -63,6 +68,7 @@ public class UserRequest {
                     .birthdate(this.birthdate)
                     .phone(this.phone)
                     .position(User.UserPosition.valueOf(this.position))
+                    .status(User.UserStatus.valueOf(this.status)) // status 필드 추가
                     .build();
         }
     }

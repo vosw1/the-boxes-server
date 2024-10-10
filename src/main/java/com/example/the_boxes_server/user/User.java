@@ -1,10 +1,13 @@
 package com.example.the_boxes_server.user;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -31,7 +34,7 @@ public class User {
 
     // 사용자 생년월일
     @Column(name = "birthdate")
-    private LocalDateTime birthdate;
+    private LocalDate birthdate;
 
     // 사용자 전화번호
     @Column(length = 20)
@@ -78,7 +81,7 @@ public class User {
             String username,
             String password,
             String name,
-            LocalDateTime birthdate,
+            LocalDate birthdate,
             String phone,
             String address,
             String email,

@@ -51,7 +51,6 @@ public class UserController {
     // 회원 가입
     @PostMapping("/join")
     public ResponseEntity<?> join(@Valid @RequestBody UserRequest.JoinDTO reqDTO, Errors errors) {
-
         String jwt = userService.joinAndLogin(reqDTO);
         UserResponse.JoinDTO respDTO = userService.joinByDTO(reqDTO);
         return ResponseEntity.ok().header("Authorization", "Bearer " + jwt).body(new ApiUtil<>(respDTO));
@@ -60,12 +59,8 @@ public class UserController {
 
     //회원가입 시 아이디 체크확인
     @GetMapping("/username-same-check")
-    public @ResponseBody ApiUtil<?> usernameSameCheck(String username){
-        Optional userOp = userService.findByUsername(username);
-        if (userOp == null) {
-            return new ApiUtil<>(true);
-        } else {
-            return new ApiUtil<>(false);
-        }
+    public @ResponseBody ApiUtil<?> usernameSameCheck(@RequestParam String username) {
+        boolean isDuplicate = userService.isUsernameDuplicate(username);
+        return new ApiUtil<>(!isDuplicate); // 중복이 없으면 true 반환
     }
 }
