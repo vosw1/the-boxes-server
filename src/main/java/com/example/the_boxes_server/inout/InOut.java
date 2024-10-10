@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import static com.example.the_boxes_server.inout.InOut.OrderStatus.PENDING;
+
 @Entity
 @Table(name = "in_out")
 @Data
@@ -65,6 +67,7 @@ public class InOut {
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now(); // 생성 시 현재 시간 설정
+        status = OrderStatus.valueOf(String.valueOf(PENDING)); // 생성시 주문 상태 대기로 설정
     }
 
     public enum OrderStatus {

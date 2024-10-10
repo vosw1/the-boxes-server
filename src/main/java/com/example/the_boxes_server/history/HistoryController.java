@@ -1,5 +1,6 @@
 package com.example.the_boxes_server.history;
 
+import com.example.the_boxes_server.core.util.ApiUtil;
 import com.example.the_boxes_server.exel.ExcelService;
 import com.example.the_boxes_server.item.Item;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class HistoryController {
             @RequestParam Optional<Item.ItemStatus> status) {
 
         List<HistoryResponse.ListDTO> historyList = historyService.list(date, startDate, endDate, status);
-        return ResponseEntity.ok(historyList); // 조회된 데이터를 반환
+        return ResponseEntity.ok(new ApiUtil<>(historyList));// 조회된 데이터를 반환
     }
 
     // 엑셀로 저장
