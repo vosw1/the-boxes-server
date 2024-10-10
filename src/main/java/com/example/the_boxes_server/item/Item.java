@@ -54,7 +54,6 @@ public class Item {
 
     @PrePersist
     protected void onCreate() {
-        createdAt = LocalDateTime.now();
         createdAt = LocalDateTime.now(); // 생성 시 현재 시간 설정
     }
 

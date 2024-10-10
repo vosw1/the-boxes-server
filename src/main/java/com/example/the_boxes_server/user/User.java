@@ -61,6 +61,10 @@ public class User {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    public String getUserName() {
+        return this.username;
+    }
+
     // 사용자 상태를 나타내는 Enum
     public enum UserStatus {
         WORKING,  // 근무중

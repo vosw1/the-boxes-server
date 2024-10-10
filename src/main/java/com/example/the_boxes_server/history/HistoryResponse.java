@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+@Data
 public class HistoryResponse {
 
     @Data
@@ -16,6 +17,10 @@ public class HistoryResponse {
         private InOutResponse.ListDTO inOut;
         private InventoryResponse.ListDTO inventory;
         private LocalDateTime createdAt;
+
+        // 기본 생성자 추가
+        public ListDTO() {
+        }
 
         public ListDTO(History history) {
             this.historyId = history.getHistoryId();

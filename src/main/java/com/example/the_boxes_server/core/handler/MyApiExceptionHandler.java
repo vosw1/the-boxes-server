@@ -23,9 +23,9 @@ public class MyApiExceptionHandler {
 
     @ExceptionHandler(Exception401.class)
     public ResponseEntity<?> unAuthorized(Exception401 e, HttpServletRequest request) {
-        log.warn("401 : " + e.getMessage()); // ex) 로그인 실패 다이렉트 메세지 [위험도는 낮지만 주의해야 하는 점이 있다 : 강제로 접속하는 인원이 발생]
-        log.warn("IP : " + request.getRemoteAddr()); // 누군지 IP 확인
-        log.warn("Agent : " + request.getHeader("User-Agent")); // 장비 확인
+        log.warn("401 : " + e.getMessage());
+        log.warn("IP : " + request.getRemoteAddr());
+        log.warn("Agent : " + request.getHeader("User-Agent"));
         return new ResponseEntity<>(e.body(), e.status());
     }
 

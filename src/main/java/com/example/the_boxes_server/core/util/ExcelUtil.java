@@ -57,7 +57,7 @@ public class ExcelUtil {
                 row.createCell(13).setCellValue(data.getInOut().getUser().getUsrId());
                 row.createCell(14).setCellValue(data.getInOut().getUser().getName());
                 row.createCell(15).setCellValue(data.getInOut().getUser().getPosition().toString());
-                row.createCell(16).setCellValue(data.getInOut().getUser().getStatus().name());
+                row.createCell(16).setCellValue(data.getInOut().getUser().getStatus().toString());
                 row.createCell(17).setCellValue(data.getInOut().getUser().getPhone());
                 row.createCell(18).setCellValue(data.getInOut().getCreatedAt().format(dateTimeFormatter));
 

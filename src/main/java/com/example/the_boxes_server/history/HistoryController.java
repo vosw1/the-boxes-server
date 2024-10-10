@@ -1,7 +1,7 @@
 package com.example.the_boxes_server.history;
 
 import com.example.the_boxes_server.core.util.ApiUtil;
-import com.example.the_boxes_server.exel.ExcelService;
+import com.example.the_boxes_server.excel.ExcelService;
 import com.example.the_boxes_server.item.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -34,8 +34,9 @@ public class HistoryController {
         return ResponseEntity.ok(new ApiUtil<>(historyList));// 조회된 데이터를 반환
     }
 
+
     // 엑셀로 저장
-    @PostMapping("/toExcel")
+    @PostMapping("/toExcel") //
     public ResponseEntity<byte[]> toExcel(@RequestBody List<HistoryResponse.ListDTO> historyList) {
         try {
             byte[] excelFile = excelService.exportDataToExcel(historyList);
@@ -44,7 +45,6 @@ public class HistoryController {
             headers.add(HttpHeaders.CONTENT_TYPE, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             return new ResponseEntity<>(excelFile, headers, HttpStatus.OK);
         } catch (IOException e) {
-            // 사용중인 로깅 프레임워크로 오류를 로깅합니다.
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
