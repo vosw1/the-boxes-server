@@ -11,11 +11,14 @@ Java를 이용해서 만드는 간단 재고  Server
 ---
 
 # Tech Stack
-|Tech|Content|
-| :-------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Framework** | ![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=flat&logo=openjdk&logoColor=white) ![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-brightgreen?logo=spring&logoColor=white) ![HTML](https://img.shields.io/badge/-HTML5-E34F26.svg?style=flat&logo=html5&logoColor=white) ![JPA](https://img.shields.io/badge/JPA-7F5C5C.svg?style=flat&logo=spring&logoColor=white) ![JSON](https://img.shields.io/badge/json-0078D4.svg?style=flat&logo=json&logoColor=white) ![Rest API](https://img.shields.io/badge/RestAPI-0A0A0A.svg?style=flat&logo=restapi&logoColor=white) |
-|    **DB**    | ![H2](https://img.shields.io/badge/H2-0073C6.svg?style=flat&logo=h2&logoColor=white) |
-|   **Tools**   | ![IntelliJ](https://img.shields.io/badge/-IntelliJ-FF2D54?logo=intellij-idea&logoColor=white) ![Notion](https://img.shields.io/badge/-Notion-000000.svg?style=flat&logo=notion&logoColor=white) ![Git](https://img.shields.io/badge/-Git-F05032.svg?style=flat&logo=git&logoColor=white)  |
+| Tech        | Content                                                                                                                                                                                                                  |
+|-------------|------------------------|
+| **Language**| ![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=flat&logo=openjdk&logoColor=white)  |
+| **Framework**| ![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-brightgreen?logo=spring&logoColor=white) ![HTML](https://img.shields.io/badge/-HTML5-E34F26.svg?style=flat&logo=html5&logoColor=white) ![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=flat&logo=hibernate&logoColor=white) ![JPA](https://img.shields.io/badge/JPA-7F5C5C.svg?style=flat&logo=spring&logoColor=white) ![JSON](https://img.shields.io/badge/json-0078D4.svg?style=flat&logo=json&logoColor=white) ![Rest API](https://img.shields.io/badge/RestAPI-0A0A0A.svg?style=flat&logo=restapi&logoColor=white) ![JUnit Test](https://img.shields.io/badge/JUnit%20Test-25A162.svg?style=flat&logo=junit&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-000000.svg?style=flat&logo=jsonwebtokens&logoColor=white)|
+| **DB**      |  ![MySQL](https://img.shields.io/badge/MySQL-4479A1?&logo=mysql&logoColor=white)          |
+| **IDE**       | ![IntelliJ](https://img.shields.io/badge/-IntelliJ-FF2D54?logo=intellij-idea&logoColor=white) | 
+| **Tools**    | ![Notion](https://img.shields.io/badge/-Notion-000000.svg?style=flat&logo=notion&logoColor=white) ![Git](https://img.shields.io/badge/-Git-F05032.svg?style=flat&logo=git&logoColor=white) ![Slack](https://img.shields.io/badge/-Slack-4A154B.svg?style=flat&logo=slack&logoColor=white)  |
+
 
 ---
 
